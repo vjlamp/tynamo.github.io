@@ -12,19 +12,19 @@ There are several aspects to providing security. Technically you can either hide
 
 To use the feature, you need to add the following dependency to your pom.xml:
 
-<dependency>
-  <groupId>org.tynamo</groupId>
-  <artifactId>tapestry-security</artifactId>
-  <version>0.6.2</version>
-</dependency>
+    <dependency>
+      <groupId>org.tynamo</groupId>
+      <artifactId>tapestry-security</artifactId>
+      <version>0.6.2</version>
+    </dependency>
 
 Apache Shiro, the security framework that tapestry-security is based on, is modular and extensible, but to get started, you need to understand just three key Shiro concepts: realms, filters and security configuration. A realm is responsible for authenticating and authorizing users, so you at least need to configure a ready-made realm, or, if you are authenticating users against your own custom database, likely need to implement your own custom realm. Typically, in your AppModule you provide a realm configuration such as:
 
-@Contribute(WebSecurityManager.class)
-public static void addRealms(Configuration<Realm> configuration) {
-	ExtendedPropertiesRealm realm = new ExtendedPropertiesRealm("classpath:shiro-users.properties");
-	configuration.add(realm);
-}
+    @Contribute(WebSecurityManager.class)
+    public static void addRealms(Configuration<Realm> configuration) {
+    	ExtendedPropertiesRealm realm = new ExtendedPropertiesRealm("classpath:shiro-users.properties");
+    	configuration.add(realm);
+    }
 
 Obviously, if your Realm needs to use other Tapestry services, you could let Tapestry build your Realm implementation with @Autobuild and inject it as an argument to your WebSecurityManager contribution method. If you create a first-class Tapestry IoC service out of your realm (you can but there should be very little need), make sure you identify your realm to the Tapestry with the right super interface. For example, if your realm is authorizing users, the interface to use is AuthorizingRealm  - if you claimed that the service implements Realm interface only, your realm wouldn't be allowed to participate in authorization, but only in authentication process. See an example of a simple, custom JPA-based entity realm (service). Shiro provides an extensive set of interfaces, often providing different functionalities depending on which features are available.
 
@@ -44,21 +44,21 @@ For 0.3.x and earlier versions, you can use a standard Shiro INI configuration f
 Configuration through contributions
 Contributing security configuration
 
-// Starting from 0.4.6, you can also use a marker annotation:
-// @Contribute(HttpServletRequestFilter.class) @Security public static void securePaths(...)
-public static void contributeSecurityConfiguration(Configuration<SecurityFilterChain> configuration,
-			SecurityFilterChainFactory factory) {
-		// /authc/** rule covers /authc , /authc?q=name /authc#anchor urls as well
-		configuration.add(factory.createChain("/authc/signup").add(factory.anon()).build());
-		configuration.add(factory.createChain("/authc/**").add(factory.authc()).build());
-		configuration.add(factory.createChain("/contributed/**").add(factory.authc()).build());
-		configuration.add(factory.createChain("/user/signup").add(factory.anon()).build());
-		configuration.add(factory.createChain("/user/**").add(factory.user()).build());
-		configuration.add(factory.createChain("/roles/user/**").add(factory.roles(), "user").build());
-		configuration.add(factory.createChain("/roles/manager/**").add(factory.roles(), "manager").build());
-		configuration.add(factory.createChain("/perms/view/**").add(factory.perms(), "news:view").build());
-		configuration.add(factory.createChain("/perms/edit/**").add(factory.perms(), "news:edit").build());
-	}
+	// Starting from 0.4.6, you can also use a marker annotation:
+	// @Contribute(HttpServletRequestFilter.class) @Security public static void securePaths(...)
+	public static void contributeSecurityConfiguration(Configuration<SecurityFilterChain> configuration,
+				SecurityFilterChainFactory factory) {
+			// /authc/** rule covers /authc , /authc?q=name /authc#anchor urls as well
+			configuration.add(factory.createChain("/authc/signup").add(factory.anon()).build());
+			configuration.add(factory.createChain("/authc/**").add(factory.authc()).build());
+			configuration.add(factory.createChain("/contributed/**").add(factory.authc()).build());
+			configuration.add(factory.createChain("/user/signup").add(factory.anon()).build());
+			configuration.add(factory.createChain("/user/**").add(factory.user()).build());
+			configuration.add(factory.createChain("/roles/user/**").add(factory.roles(), "user").build());
+			configuration.add(factory.createChain("/roles/manager/**").add(factory.roles(), "manager").build());
+			configuration.add(factory.createChain("/perms/view/**").add(factory.perms(), "news:view").build());
+			configuration.add(factory.createChain("/perms/edit/**").add(factory.perms(), "news:edit").build());
+		}
 
 Note that above, a call to factory.<filtername>() gives you a new instance of the filter each time. In fact, you get a runtime error if you try to contribute the same filter instance to a different chain with a different configuration.
 
@@ -69,61 +69,61 @@ Routing error codes in your web.xml
 
 In your web.xml, you most likely want to route 401 (Unauthorized) to your own error page instead of the container provided one, for example:
 
-...
-    <error-page>
-        <error-code>401</error-code>
-        <location>/error401</location>
-    </error-page>
-    <error-page>
-        <error-code>404</error-code>
-        <location>/error404</location>
-    </error-page>
-</web-app>
+	...
+	    <error-page>
+	        <error-code>401</error-code>
+	        <location>/error401</location>
+	    </error-page>
+	    <error-page>
+	        <error-code>404</error-code>
+	        <location>/error404</location>
+	    </error-page>
+	</web-app>
 
 Also, note that by the servlet spec, application filters don't handle error requests by default (Jetty, at least the old versions, didn't conform). So, to get the Tapestry filter to handle the ERROR request, you also need to configure:
 
-    <filter-mapping>
-        <filter-name>vuact</filter-name>
-        <url-pattern>/*</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
-        <dispatcher>ERROR</dispatcher>
-    </filter-mapping>
+	<filter-mapping>
+	    <filter-name>vuact</filter-name>
+	    <url-pattern>/*</url-pattern>
+	    <dispatcher>REQUEST</dispatcher>
+	    <dispatcher>ERROR</dispatcher>
+	</filter-mapping>
 
 Security annotations
 
 To declaratively secure your pages, you can use the following annotations:
 
 /* Shiro annotations, for securing operations */
-@RequiresPermissions
-@RequiresRoles
-@RequiresUser
-@RequiresGuest
-@RequiresAuthentication
+	@RequiresPermissions
+	@RequiresRoles
+	@RequiresUser
+	@RequiresGuest
+	@RequiresAuthentication
 
 For example, to restrict access to users with roles "admin" only, you would add a following annotation to a page class:
 
-@RequiresRoles("admin")
-public class AdminPage {
-}
+	@RequiresRoles("admin")
+	public class AdminPage {
+	}
 
 You can also secure access to services and service operations, for example:
 
-@RequiresAuthentication
-public interface AlphaService {
-        @RequiresRoles("admin")
-        void secureMethod();
-
-        void secureMethod2();
-}
+	@RequiresAuthentication
+	public interface AlphaService {
+	        @RequiresRoles("admin")
+	        void secureMethod();
+	
+	        void secureMethod2();
+	}
 
 Permissions are another interesting aspect of Shiro. Shiro's default WildCardPermission supports a syntax that allows representing different parts and subparts in a permission string. For example:
 
-public class Index {
-  @RequiresPermissions("news:delete")
-  public void onActionFromDeleteNews(EventContext eventContext) {
-     ...
-  }
-}
+	public class Index {
+	  @RequiresPermissions("news:delete")
+	  public void onActionFromDeleteNews(EventContext eventContext) {
+	     ...
+	  }
+	}
 
 In your realm, you allocate individual permission strings to each user that are then matched against the permission strings from the annotations. For more information, read Shiro's documentation on permissions. While the permission concept is flexible, it still doesn't allow you to declaratively secure instances of data. You can programmatically check for instance level permissions but it's cumbersome to allocate the correct permissions and equally cumbersome to later verify them. Entity-Relationship Based Access Control (ERBAC) system allows declaring subject-instance security rules. For example, all users can read each other's profile data, but only modify their own. If you are using JPA, you are in luck since our implementation of ERBAC security concept, tapestry-security-jpa module allows securing your entities with simple annotations @RequiresAssociation and @RequiresRole, check out tapestry-security-jpa!
 Security components
@@ -132,35 +132,35 @@ There are often cases where it's not enough to simply secure the urls or the pag
 
 The names of following components should give you a pretty good hint of their purpose, can you guess what all of them do? 0.5.1 also added support for an p:else block for all the built-in security components.
 
-Authenticated
-NotAuthenticated
-User
-Guest
-HasAnyRoles
-HasPermission
-HasRole
-LacksPermission
-LacksRole
-LoginForm
-LoginLink
+	Authenticated
+	NotAuthenticated
+	User
+	Guest
+	HasAnyRoles
+	HasPermission
+	HasRole
+	LacksPermission
+	LacksRole
+	LoginForm
+	LoginLink
 
 Some simple examples below:
 
-<t:security.user>
-  Hello, ${username}
-   // else only from 0.5.1 and up
-   <p:else>
-    Hello guest
-   </p:else>
-??</t:security.user>
-
-<t:security.guest>
-  <t:actionlink t:id="createAccount">Create account</t:actionlink>
-</t:security.guest>
-
-<t:security.hasRole role="admin">
-  <t:actionlink t:id="delete">delete user</t:actionlink>
-</t:security.hasRole>
+	<t:security.user>
+	  Hello, ${username}
+	   // else only from 0.5.1 and up
+	   <p:else>
+	    Hello guest
+	   </p:else>
+	</t:security.user>
+	
+	<t:security.guest>
+	  <t:actionlink t:id="createAccount">Create account</t:actionlink>
+	</t:security.guest>
+	
+	<t:security.hasRole role="admin">
+	  <t:actionlink t:id="delete">delete user</t:actionlink>
+	</t:security.hasRole>
 
 Overriding login, success and unauthorized URLs
 
@@ -168,13 +168,13 @@ tapestry-security comes with two very simple login and unauthorized pages, and a
 
 Most likely, you will want to change these URLs to point to your own customized pages. To do that use SecuritySymbols
 
-public static void contributeApplicationDefaults(MappedConfiguration<String, String> configuration)
-{
-	// Tynamo's tapestry-security module configuration
-	configuration.add(SecuritySymbols.LOGIN_URL, "/signin");
-	configuration.add(SecuritySymbols.UNAUTHORIZED_URL, "/blocked");
-	configuration.add(SecuritySymbols.SUCCESS_URL, "/logged");
-}
+	public static void contributeApplicationDefaults(MappedConfiguration<String, String> configuration)
+	{
+		// Tynamo's tapestry-security module configuration
+		configuration.add(SecuritySymbols.LOGIN_URL, "/signin");
+		configuration.add(SecuritySymbols.UNAUTHORIZED_URL, "/blocked");
+		configuration.add(SecuritySymbols.SUCCESS_URL, "/logged");
+	}
 
 More examples
 
@@ -183,25 +183,25 @@ Case study: Securing Javamelody - An example of integrating a non-Tapestry libra
 
 Javamelody is one of the best open-source server health monitoring packages available for Java webapps at the moment. Javamelody is implemented as a ServletFilter. Each request needs to pass through the filter to be accounted for. The same filter is also responsible for producing the reports by handling requests to "/monitoring" url directly. This imposes a problem with securing the "/monitoring" url. If you declare the Javamelody filter before Tapestry filter you couldn't secure the monitoring page (with a Tapestry-based security solution), and if you declared it after the Tapestry filter, the monitoring filter would never be invoked for requests handled by Tapestry. The solution is to inject the Monitoring filter into your security filter chain configuration, like so:
 
-    @Contribute(HttpServletRequestFilter.class)
-    @Security
-    public static void securePaths(Configuration<SecurityFilterChain> configuration, SecurityFilterChainFactory factory,
-        final ApplicationGlobals applicationgGlobals) throws ServletException {
-        FilterConfig filterConfig = new FilterConfig() {
-            @Override
-            public String getFilterName() {return "monitoring";}
-            @Override
-            public ServletContext getServletContext() {return applicationgGlobals.getServletContext();}
-            @Override
-            public String getInitParameter(String name) {return null;}
-            @Override
-            public Enumeration getInitParameterNames() {return null;}
-        };
-        MonitoringFilter monitoring = new MonitoringFilter();
-        monitoring.init(filterConfig);
-        configuration.add(factory.createChain("/monitoring/**").add(factory.authc()).add(factory.roles(), "admin")
-            .add(monitoring).build());
-        configuration.add(factory.createChain("/**").add(monitoring).build());
-    }
+	@Contribute(HttpServletRequestFilter.class)
+	@Security
+	public static void securePaths(Configuration<SecurityFilterChain> configuration, SecurityFilterChainFactory factory,
+	    final ApplicationGlobals applicationgGlobals) throws ServletException {
+	    FilterConfig filterConfig = new FilterConfig() {
+	        @Override
+	        public String getFilterName() {return "monitoring";}
+	        @Override
+	        public ServletContext getServletContext() {return applicationgGlobals.getServletContext();}
+	        @Override
+	        public String getInitParameter(String name) {return null;}
+	        @Override
+	        public Enumeration getInitParameterNames() {return null;}
+	    };
+	    MonitoringFilter monitoring = new MonitoringFilter();
+	    monitoring.init(filterConfig);
+	    configuration.add(factory.createChain("/monitoring/**").add(factory.authc()).add(factory.roles(), "admin")
+	        .add(monitoring).build());
+	    configuration.add(factory.createChain("/**").add(monitoring).build());
+	}
 
 Notice that above, we are using the same instance of the monitoring filter in both chains, which is perfectly fine since standard servlet filters do not carry any chain specific configuration (unlike typical Shiro filters). With this configuration, we can now both analyze every request and secure the monitoring reporting page. Any other standard ServletFilters can also easily be configured as part of the security configuration, completely avoiding web.xml configuration. Also, unrelated to security, but Javamelody comes with its own gzipping, so remember to use 1.39.0 version or better and turn off its gzipping (using context parameter gzip-compression-disabled), otherwise it'll conflict with Tapestry's gzipping facilities.
