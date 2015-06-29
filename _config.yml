@@ -1,0 +1,24 @@
+# Dependencies
+markdown:         redcarpet
+highlighter:      pygments
+
+# Permalinks
+permalink:        pretty
+
+# Setup
+title:            Tynamo
+tagline:          'Tynamo is model-driven'
+description:      'Tynamo is model-driven, full-stack web framework based on Apache Tapestry 5.'
+url:              http://tynamo.org
+
+author:
+  name:           'Kalle Korhonen'
+  url:            https://twitter.com/tynamo_org
+
+paginate:         5
+
+# Custom vars
+version:          2.0.0
+
+github:
+  repo:           https://github.com/tynamo/
