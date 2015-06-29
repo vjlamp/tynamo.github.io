@@ -6,7 +6,8 @@ title: tapestry-security guide
 ## Overview
 
 Enforcing security by implementing security checks in your application code is labor-intensive and a potentially dangerous practice as you can very easily miss a check and leave a big security hole open. Standard container-managed authentication and authorization was created to address this issue, but it's based purely on roles and URLs, and as such, is typically too constricting for modern web applications. With Tapestry 5, it's relatively easy to get started with securing your application by creating custom filters and dispatchers, but really, every user of Tapestry shouldn't need to create their own security framework. Developing comprehensive, proven bullet-proof security framework is difficult and time consuming. Tynamo's tapestry-security is a comprehensive security module that provides tight integration with Apache Shiro, an established, high-performing and easy-to-use security framework for Tapestry applications.
-Using security
+
+## Using security
 
 There are several aspects to providing security. Technically you can either hide functionality from user's view, visibly disable or lock certain functionality or display errors when user tries accessing forbidden resources or operations. Security can be enforced at different integration points: for example, you may restrict users' access to certain URLs, secure access to the data itself or make specific checks in an operation of the controlling page class or service before executing certain functionality. Tapestry-security module supports all these different types of authorization mechanisms.
 
@@ -18,7 +19,7 @@ To use the feature, you need to add the following dependency to your pom.xml:
       <version>0.6.2</version>
     </dependency>
 
-Apache Shiro, the security framework that tapestry-security is based on, is modular and extensible, but to get started, you need to understand just three key Shiro concepts: realms, filters and security configuration. A realm is responsible for authenticating and authorizing users, so you at least need to configure a ready-made realm, or, if you are authenticating users against your own custom database, likely need to implement your own custom realm. Typically, in your AppModule you provide a realm configuration such as:
+Apache Shiro, the security framework that tapestry-security is based on, is modular and extensible, but to get started, you need to understand just three key Shiro concepts: **realms, filters** and **security configuration**. A realm is responsible for authenticating and authorizing users, so you at least need to configure a ready-made realm, or, if you are authenticating users against your own custom database, likely need to implement your own custom realm. Typically, in your AppModule you provide a realm configuration such as:
 
     @Contribute(WebSecurityManager.class)
     public static void addRealms(Configuration<Realm> configuration) {
@@ -36,13 +37,16 @@ Apache Shiro is persistence agnostic so you need to decide yourself how to store
 Shiro is based on multiple filter chains which is a natural fit with tapestry's (filter) pipeline pattern. In the typical case, you don't have to implement new filters but merely configure them to process desired urls of your application. Refer to the Shiro configuration for more information, but tapestry-security makes the default Shiro filters available so you can refer to them by name.
 
 Shiro supports url-based permission checking out of the box. Tapestry-security also comes with several security annotations and some security components that you can use in your page classes and templates to secure specific operations or access to the page.
-Configuration
+
+## Configuration
 
 Shiro's default configuration model uses an INI file (a property file with sections). However, Tapestry-security 0.4.0 introduced a Tapestry-style configuration through contributions and completely removed support for ini-style configuration. Tapestry-style all-in-Java configuration has many benefits, including type checking, run-time filter re-configuration (should you ever need it...) and better performance (indirectly - 0.4.0 supplies its own "Shiro" filters - this feature enhancement may be pushed upstream in Shiro 2.0 - see configuration per filter instance in Version+2+Brainstorming if interested).
 
 For 0.3.x and earlier versions, you can use a standard Shiro INI configuration file (see Shiro's documentation for more info) with tapestry-security. All versions support annotation-based security. The simplest and most typical security models are based on url and role permissions, see the following version-specific sections for examples on them.
-Configuration through contributions
-Contributing security configuration
+
+### Configuration through contributions
+
+**Contributing security configuration**
 
 	// Starting from 0.4.6, you can also use a marker annotation:
 	// @Contribute(HttpServletRequestFilter.class) @Security public static void securePaths(...)
@@ -65,7 +69,8 @@ Note that above, a call to factory.<filtername>() gives you a new instance of th
 (Example taken from the AppModule of a security test application)
 
 0.4.1 also introduced a dependency to tapestry-exceptionpage (a version of it is built-in to T5.4). The security exceptions thrown from the filters annotation handlers are all handled by the same exception handler assistant. You can also handle other generic exceptions in your application the same way, read more about it at tapestry-exceptionpage guide (or DefaultRequestExceptionHandler documentation for T5.4). anon() and authc() etc. above refer to the Shiro filter names. See all Shiro filters available by default.
-Routing error codes in your web.xml
+
+### Routing error codes in your web.xml
 
 In your web.xml, you most likely want to route 401 (Unauthorized) to your own error page instead of the container provided one, for example:
 
@@ -89,7 +94,7 @@ Also, note that by the servlet spec, application filters don't handle error requ
 	    <dispatcher>ERROR</dispatcher>
 	</filter-mapping>
 
-Security annotations
+## Security annotations
 
 To declaratively secure your pages, you can use the following annotations:
 
@@ -162,9 +167,9 @@ Some simple examples below:
 	  <t:actionlink t:id="delete">delete user</t:actionlink>
 	</t:security.hasRole>
 
-Overriding login, success and unauthorized URLs
+### Overriding login, success and unauthorized URLs
 
-tapestry-security comes with two very simple login and unauthorized pages, and also by default the success url will be /index
+**tapestry-security** comes with two very simple login and unauthorized pages, and also by default the success url will be /index
 
 Most likely, you will want to change these URLs to point to your own customized pages. To do that use SecuritySymbols
 
@@ -176,10 +181,11 @@ Most likely, you will want to change these URLs to point to your own customized 
 		configuration.add(SecuritySymbols.SUCCESS_URL, "/logged");
 	}
 
-More examples
+## More examples
 
 For more extensive examples, take a look at our full-featured integration test web app. See for example the Index page template and class and the AlphaService. Also, check out tynamo-federatedaccounts, an add-on module to tapestry-security for remote & merged authentication use cases, such as Oauth. We have a live example available for federatedaccounts but the example application also demonstrates other useful capabilities of tapestry-security, such as realm as a service, contributing multiple realms, interoperability between them, creating and using a CurrentUser application state object and using permissions. In the example, one realm is responsible for only authenticating users while another one is responsible for authorizing them. Clone the tynamo-example-federatedaccounts repo or browse the sources online, starting from AppModule
-Case study: Securing Javamelody - An example of integrating a non-Tapestry library using a standard ServletFilter
+
+### Case study: Securing Javamelody - An example of integrating a non-Tapestry library using a standard ServletFilter
 
 Javamelody is one of the best open-source server health monitoring packages available for Java webapps at the moment. Javamelody is implemented as a ServletFilter. Each request needs to pass through the filter to be accounted for. The same filter is also responsible for producing the reports by handling requests to "/monitoring" url directly. This imposes a problem with securing the "/monitoring" url. If you declare the Javamelody filter before Tapestry filter you couldn't secure the monitoring page (with a Tapestry-based security solution), and if you declared it after the Tapestry filter, the monitoring filter would never be invoked for requests handled by Tapestry. The solution is to inject the Monitoring filter into your security filter chain configuration, like so:
 
