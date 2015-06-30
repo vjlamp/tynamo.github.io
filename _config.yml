@@ -1,5 +1,5 @@
 # Dependencies
-markdown:         redcarpet
+markdown:         kramdown
 highlighter:      pygments
 
 # Permalinks
@@ -16,7 +16,11 @@ author:
   name:           'Kalle Korhonen'
   url:            https://twitter.com/tynamo_org
 
-paginate:         5
+paginate: 				10 # pagination based on number of posts
+paginate_path: 		"page:num"
+exclude: 					["README.md"] # files to exclude
+highlighter: 			pygments
+
 
 # Custom vars
 version:          2.0.0

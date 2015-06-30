@@ -3,6 +3,20 @@ layout: page
 title: tapestry-security guide
 ---
 
+<div markdown="block" class="alert alert-info">
+**Version status: 0.6.2 for T5.4, 0.5.1 stable for T5.3, 0.4.6 stable for T5.2 and 0.2.2 for T5.1**
+
+tapestry-security module is based on and depends on Apache Shiro. 0.4.1 depends on Apache Shiro 1.2.0, earlier versions depend on 1.1.0
+
+Source and issue management moved to Github!
+
+Critical issues will be fixed for 0.4.x, feature development only for 0.6.x versions. Versions before 0.4.0 are not maintained anymore.
+
+0.4.0 introduced fully Tapestry-style configuration and performance improvements.
+
+</div>
+
+
 ## Overview
 
 Enforcing security by implementing security checks in your application code is labor-intensive and a potentially dangerous practice as you can very easily miss a check and leave a big security hole open. Standard container-managed authentication and authorization was created to address this issue, but it's based purely on roles and URLs, and as such, is typically too constricting for modern web applications. With Tapestry 5, it's relatively easy to get started with securing your application by creating custom filters and dispatchers, but really, every user of Tapestry shouldn't need to create their own security framework. Developing comprehensive, proven bullet-proof security framework is difficult and time consuming. Tynamo's tapestry-security is a comprehensive security module that provides tight integration with Apache Shiro, an established, high-performing and easy-to-use security framework for Tapestry applications.
