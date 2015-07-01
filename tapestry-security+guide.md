@@ -1,6 +1,6 @@
 ---
 layout: guide
-title: tapestry-security guide
+title: tapestry-security
 ---
 
 <div markdown="1" class="alert alert-info">

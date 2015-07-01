@@ -1,6 +1,6 @@
 ---
 layout: guide
-title: tapestry-resteasy guide
+title: tapestry-resteasy
 ---
 
 ## User guide for Tapestry-resteasy module

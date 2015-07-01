@@ -1,6 +1,6 @@
 ---
 layout: guide
-title: tapestry-routing guide
+title: tapestry-routing
 ---
 
 
