@@ -141,6 +141,10 @@ article.home h4 a:hover {
 footer {
 	padding-top: 15px;
 	font-family: 'Ubuntu';
+	text-align: center;
+}
+footer p {
+	font-size:90%;
 	font-style: italic;
 	color: grey;
 }
