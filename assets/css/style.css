@@ -141,6 +141,17 @@ article.home h4 a:hover {
 footer {
 	padding-top: 15px;
 	font-family: 'Ubuntu';
+	font-style: italic;
+	color: grey;
+}
+
+.abstract {
+	font-size:95%;
+	padding-left:2em;
+	padding-top:2em;
+	padding-right:12em;
+	padding-bottom:2em;
+	font-style:italic;
 }
 
 /* nav-vertical-tabs component */

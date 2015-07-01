@@ -8,8 +8,8 @@ permalink:        pretty
 # Setup
 title:            Tynamo
 tagline:          'Tynamo is model-driven'
-description:      'Tynamo is model-driven, full-stack web framework based on Apache Tapestry 5.'
-abstract:         '<h1><strong>Tynamo</strong> is model-driven, full-stack web framework based on <a href="http://tapestry.apache.org/" class="external-link">Apache Tapestry 5</a></h1><p><i>Tynamo''s mission is to <strong>provide implementations for different aspects of a full web application stack</strong> that offer reasonable out-of-the-box functionality and are easy to customize. We are intent on proving that web applications based on Java can simultaneously be <strong>high performing, easy to implement and fun to develop</strong>. We leverage existing technologies where possible and provide integrations with proven, clean and compact libraries rather than limit ourselves only to standard Java (JSRs). Tynamo is both comprehensive and modular so you are free to choose the parts you like from our full stack. And finally, we like Tapestry and our modules use Tapestry IoC extensively.</i></p>'
+description:      '<strong>Tynamo</strong> is model-driven, full-stack web framework based on <a href="http://tapestry.apache.org/" class="external-link">Apache Tapestry 5</a>'
+abstract:         'Tynamo''s mission is to <strong>provide implementations for different aspects of a full web application stack</strong> that offer reasonable out-of-the-box functionality and are easy to customize. We are intent on proving that web applications based on Java can simultaneously be <strong>high performing, easy to implement and fun to develop</strong>. We leverage existing technologies where possible and provide integrations with proven, clean and compact libraries rather than limit ourselves only to standard Java (JSRs). Tynamo is both comprehensive and modular so you are free to choose the parts you like from our full stack. And finally, we like Tapestry and our modules use Tapestry IoC extensively.'
 url:              http://tynamo.org
 
 author:
