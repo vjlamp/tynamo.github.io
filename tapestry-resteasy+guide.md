@@ -293,7 +293,8 @@ like so:
 Check google for more information: <http://www.google.com/search?hl=en&q=com.sun.xml.stream.ZephyrParserFactory+cannot+be+cast+to+org.codehaus.stax2.XMLInputFactory2&aq=f&oq=&aqi=>
  
 ### version table
- 
+
+|--- 
 | tapestry-resteasy	| Tapestry	| RESTEasy	| notes: | 
 | 0.0.1	| 5.1.x	| 1.1.GA	| see [tapestry-resteasy-0.0.1 guide](https://web.archive.org/web/20150506154009/http://tynamo.org/tapestry-resteasy-0.0.1+guide) |
 | 0.2.1	| 5.2.x	| 2.0.1.GA |
@@ -301,3 +302,4 @@ Check google for more information: <http://www.google.com/search?hl=en&q=com.sun
 | 0.3.1	| 5.3.x	| 3.0-beta-4 |
 | 0.3.2	| 5.3.x	| 3.0.1.Final	|
 | 0.4.0	| 5.4.x	| 3.0.7.Final	|
+{: .table .table-condensed .table-bordered}

@@ -25,7 +25,8 @@ First (as always), add the tapestry-routing dependency to your pom.xml
 	</dependency>
 
 Then annotate your pages with the **@Route** annotations (**@At** annotations are still supported and work the same way)
-eg:
+e.g.:
+
 ---
 
 Let's say you have a page: pages.projects.Members which have 2 parameters in its activation context: (*Long projectId, Long memberId*) and you want the URL for that page to look like **/projects/1/members/1**
@@ -54,6 +55,7 @@ Here is an example of how *tapestry-model* is using *tapestry-routing*:
 | /recipe/new | @At("/{0}/new") public class Add | return an HTML form for creating a new recipe |
 | /recipe/{id} | @At("/{0}/{1}") public class Show | display a specific recipe |
 | /recipe/{id}/edit | @At("/{0}/{1}/edit") public class Edit | return an HTML form for editing a recipe |
+{: .table .table-condensed .table-bordered}
 
 ## Index Pages
 
