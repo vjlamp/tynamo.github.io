@@ -5,7 +5,7 @@ title: tapestry-resteasy guide
 
 ## User guide for Tapestry-resteasy module
 
-tapestry-resteasy provides integration with Tapestry 5 and JBoss' RESTEasy, an implementation JAX-RS (Java API for RESTful Web Services). JAX-RS is a very nice little spec and if you know what it is about, the following should be very easy to understand. Otherwise, read up on it at Jersey's overview (the reference implementation) or the actual specification. JBoss' RESTEasy provides a few more features over the reference implementation.
+tapestry-resteasy provides integration with Tapestry 5 and [JBoss' RESTEasy](http://www.jboss.org/resteasy), an implementation JAX-RS (Java API for RESTful Web Services). JAX-RS is a very nice little spec and if you know what it is about, the following should be very easy to understand. Otherwise, read up on it at [Jersey's overview](https://wikis.oracle.com/display/Jersey/Overview+of+JAX-RS+1.0+Features) (the reference implementation) or [the actual specification](https://jcp.org/en/jsr/detail?id=311). JBoss' RESTEasy provides a few more features over the reference implementation.
 
 ### Outline
 
@@ -103,7 +103,7 @@ Good practices:
 
 ### Annotate your entities.
 
-Don't forget to annotate your entities with JAXB annotations. You need at least @XmlRootElement. See: http://www.caucho.com/resin-3.1/doc/jaxb-annotations.xtp
+Don't forget to annotate your entities with JAXB annotations. You need at least @XmlRootElement. See: <http://www.caucho.com/resin-3.1/doc/jaxb-annotations.xtp>
 
 	package org.tynamo.examples.simple.entities;
 	
@@ -171,7 +171,7 @@ Don't forget to annotate your entities with JAXB annotations. You need at least 
 
 ### Add a provider library to your pom.xml
 
-<div markdown="1" class="alert alert-warn">
+<div markdown="1" class="alert alert-warning">
 By default tapestry-resteasy does not includes any marshaller/unmarshaller dependency.
 
 You will need to manually add the dependency to your pom.xml
@@ -214,11 +214,11 @@ Since the upgrade to Tapestry 5.3 and the move from Javassist to Plastic your JA
 
 ### Live class reloading
 
-<div markdown="1" class="alert alert-warn">
+<div markdown="1" class="alert alert-warning">
 Available since tapestry-resteasy 0.2.1!
 </div>
 
-Reloading is limited to services that can be proxied, so to enable live class reloading for your REST services you need to create them as regular Tapestry IoC services with an interface and an implementation of that interface. You then have the option to leave them both in the autodiscovery package or explicitly bind them as services and contribute them to javax.ws.rs.core.Application.class. Read more about how service implementation reloading works in: http://tapestry.apache.org/reload.html
+Reloading is limited to services that can be proxied, so to enable live class reloading for your REST services you need to create them as regular Tapestry IoC services with an interface and an implementation of that interface. You then have the option to leave them both in the autodiscovery package or explicitly bind them as services and contribute them to javax.ws.rs.core.Application.class. Read more about how service implementation reloading works in: <http://tapestry.apache.org/reload.html>
 
 Here is an example from the tapestry-resteasy test suite.
 
@@ -237,8 +237,8 @@ public static void configureRestResources(Configuration<Object> singletons, Relo
 
 ### Enjoy
 
-   - http://localhost:8080/rest/mydomainobject/
-   - http://localhost:8080/rest/mydomainobject/1
+   - <http://localhost:8080/rest/mydomainobject/>
+   - <http://localhost:8080/rest/mydomainobject/1>
 
  
 
@@ -290,12 +290,12 @@ like so:
 		</configuration>
 	</plugin>
 
-Check google for more information: http://www.google.com/search?hl=en&q=com.sun.xml.stream.ZephyrParserFactory+cannot+be+cast+to+org.codehaus.stax2.XMLInputFactory2&aq=f&oq=&aqi=
+Check google for more information: <http://www.google.com/search?hl=en&q=com.sun.xml.stream.ZephyrParserFactory+cannot+be+cast+to+org.codehaus.stax2.XMLInputFactory2&aq=f&oq=&aqi=>
  
 ### version table
  
 | tapestry-resteasy	| Tapestry	| RESTEasy	| notes: | 
-| 0.0.1	| 5.1.x	| 1.1.GA	| see tapestry-resteasy-0.0.1 guide |
+| 0.0.1	| 5.1.x	| 1.1.GA	| see [tapestry-resteasy-0.0.1 guide](https://web.archive.org/web/20150506154009/http://tynamo.org/tapestry-resteasy-0.0.1+guide) |
 | 0.2.1	| 5.2.x	| 2.0.1.GA |
 | 0.3.0	| 5.3.x	| 2.3.0.GA | 
 | 0.3.1	| 5.3.x	| 3.0-beta-4 |
