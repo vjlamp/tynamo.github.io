@@ -199,7 +199,11 @@ ul.dropdown-menu>li>a>i.fa {
 }
 
 .sidebar-page-list {
-	list-style: outside none none;
+	line-height: 0.9;
+	font-size:95%;
+	list-style-type: circle;
+  list-style-position: outside;
+  padding-left:1em;
 }
 
 .sidebar-nav-item.active {
@@ -209,7 +213,7 @@ ul.dropdown-menu>li>a>i.fa {
     color: #fff;
 }
 .sidebar-nav-item {
-    display: block;
-    line-height: 1.75;
+    line-height: 1;
+    padding-top:0.5em;
 }
 

@@ -1,6 +1,7 @@
 ---
 layout: guide
 title: tapestry-jpa
+repository_url: https://github.com/tynamo/tapestry-jpa
 ---
 Tapestry JPA provides integration between Tapestry 5 and the JPA Specifications ( JPA1: JSR-220 and JPA2: JSR-317). It is modeled after tapestry's hibernate module and provides the same features. It has been used in production for some time now and is considered to be stable.
 

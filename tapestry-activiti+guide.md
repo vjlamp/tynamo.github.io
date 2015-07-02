@@ -1,6 +1,7 @@
 ---
 layout: guide
 title: tapestry-activiti
+repository_url: https://github.com/tynamo/tapestry-activity
 ---
 <div markdown="1" class="alert alert-info">
 **version status: 0.0.1 alpha released**

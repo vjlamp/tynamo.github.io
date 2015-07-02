@@ -1,6 +1,7 @@
 ---
 layout: guide
 title: tapestry-ckeditor
+repository_url: https://github.com/tynamo/tapestry-ckeditor
 ---
 ## Overview
 

@@ -1,6 +1,7 @@
 ---
 layout: guide
 title: tapestry-seedentity
+repository_url: https://github.com/tynamo/tapestry-seedentity
 ---
 <div markdown="1" class="alert alert-info">
 **Version status: 0.1.3 release stable, in production**

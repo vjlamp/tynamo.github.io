@@ -1,6 +1,7 @@
 ---
 layout: guide
 title: tapestry-exceptionpage
+repository_url: https://github.com/tynamo/tapestry-exceptionpage
 ---
 <div markdown="1" class="alert alert-info">
 **Version status: 0.1.2 beta, used in production**

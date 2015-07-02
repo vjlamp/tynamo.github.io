@@ -1,5 +1,5 @@
 ---
-layout: guide
+layout: notes
 title: Developing with Tomcat and Eclipse
 ---
 <div markdown="1" class="alert alert-info">

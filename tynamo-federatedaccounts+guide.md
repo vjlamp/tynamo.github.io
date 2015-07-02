@@ -1,6 +1,7 @@
 ---
 layout: guide
 title: tynamo-federatedaccounts
+repository_url: https://github.com/tynamo/tynamo-federatedaccounts
 ---
 <div markdown="1" class="alert alert-info">
 **Version status: 0.5.0 beta for T5.4, 0.4.3 beta for T5.3.x**
