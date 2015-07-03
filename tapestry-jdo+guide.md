@@ -4,7 +4,7 @@ title: tapestry-jdo
 repository_url: https://github.com/tynamo/tapestry-jdo
 ---
 <div markdown="1" class="alert alert-info">
-** Version Status : 0.0.2 second release**
+**Version Status : 0.0.2 second release**
 
 Tested with Tapestry 5.2.x and 5.3.x
 </div>
