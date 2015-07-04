@@ -1,7 +1,7 @@
 ---
 layout: guide
 title: tapestry-watchdog
-repository_url: https://github.com/tynamo/tapestry-watchdog
+repository_name: tapestry-watchdog
 ---
 <div markdown="1" class="alert alert-info">
 **Version status: 0.0.2 experimental (for lack of features), used in production**

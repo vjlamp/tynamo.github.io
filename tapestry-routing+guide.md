@@ -1,7 +1,7 @@
 ---
 layout: guide
 title: tapestry-routing
-repository_url: https://github.com/tynamo/tapestry-routing
+repository_name: tapestry-routing
 ---
 
 

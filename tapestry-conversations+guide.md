@@ -1,7 +1,7 @@
 ---
 layout: guide
 title: tapestry-conversations
-repository_url: https://github.com/tynamo/tapestry-conversations
+repository_name: tapestry-conversations
 ---
 <div markdown="1" class="alert alert-info">
 Version status: 0.1.2 release stable, in production

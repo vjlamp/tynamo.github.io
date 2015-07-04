@@ -1,7 +1,7 @@
 ---
 layout: guide
 title: tapestry-resteasy
-repository_url: https://github.com/tynamo/tapestry-resteasy
+repository_name: tapestry-resteasy
 ---
 
 ## User guide for Tapestry-resteasy module

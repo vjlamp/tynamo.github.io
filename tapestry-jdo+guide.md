@@ -1,7 +1,7 @@
 ---
 layout: guide
 title: tapestry-jdo
-repository_url: https://github.com/tynamo/tapestry-jdo
+repository_name: tapestry-jdo
 ---
 <div markdown="1" class="alert alert-info">
 **Version Status : 0.0.2 second release**

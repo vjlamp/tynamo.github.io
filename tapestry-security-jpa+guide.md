@@ -1,7 +1,7 @@
 ---
 layout: guide
 title: tapestry-security-jpa
-repository_url: https://github.com/tynamo/tapestry-security-jpa
+repository_name: tapestry-security-jpa
 ---
 <div markdown="1" class="alert alert-info">
 **Version status: 0.0.4 beta**

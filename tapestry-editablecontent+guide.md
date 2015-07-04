@@ -1,7 +1,7 @@
 ---
 layout: guide
 title: tapestry-editablecontent
-repository_url: https://github.com/tynamo/tapestry-editablecontent
+repository_name: tapestry-editablecontent
 ---
 
 <div markdown="1" class="alert alert-info">
