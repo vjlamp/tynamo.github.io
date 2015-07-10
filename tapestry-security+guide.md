@@ -43,10 +43,11 @@ Apache Shiro, the security framework that tapestry-security is based on, is modu
 
 Obviously, if your Realm needs to use other Tapestry services, you could let Tapestry build your Realm implementation with @Autobuild and inject it as an argument to your WebSecurityManager contribution method. If you create a first-class Tapestry IoC service out of your realm (you can but there should be very little need), make sure you identify your realm to the Tapestry with the right super interface. For example, if your realm is authorizing users, the interface to use is AuthorizingRealm  - if you claimed that the service implements Realm interface only, your realm wouldn't be allowed to participate in authorization, but only in authentication process. See an example of a simple, custom JPA-based entity realm (service). Shiro provides an extensive set of interfaces, often providing different functionalities depending on which features are available.
 
-Storing password
-Icon
+<div markdown="1" class="alert alert-success">
+**Storing password**
 
-Apache Shiro is persistence agnostic so you need to decide yourself how to store the passwords and compare their equality. Shiro comes with several built-in matchers to make this simple. The User entity used by the realm sample referred to above also shows an example of storing an SHA-1 hash with per user salt.
+Apache Shiro is persistence agnostic so you need to decide yourself how to store the passwords and compare their equality. Shiro comes with several built-in matchers to make this simple. The [User entity used by the realm sample referred to above](https://github.com/tynamo/tynamo-federatedaccounts/blob/master/tynamo-federatedaccounts-test/src/test/java/org/tynamo/security/federatedaccounts/testapp/entities/User.java) also shows an example of storing an SHA-1 hash with per user salt.
+</div>
 
 Shiro is based on multiple filter chains which is a natural fit with tapestry's (filter) pipeline pattern. In the typical case, you don't have to implement new filters but merely configure them to process desired urls of your application. Refer to the Shiro configuration for more information, but tapestry-security makes the default Shiro filters available so you can refer to them by name.
 
@@ -80,23 +81,24 @@ For 0.3.x and earlier versions, you can use a standard Shiro INI configuration f
 
 Note that above, a call to factory.<filtername>() gives you a new instance of the filter each time. In fact, you get a runtime error if you try to contribute the same filter instance to a different chain with a different configuration.
 
-(Example taken from the AppModule of a security test application)
+(Example taken from the [AppModule of a security test application](https://github.com/tynamo/tapestry-security/tree/master/src/test/java/org/tynamo/security/testapp/services/AppModule.java))
 
-0.4.1 also introduced a dependency to tapestry-exceptionpage (a version of it is built-in to T5.4). The security exceptions thrown from the filters annotation handlers are all handled by the same exception handler assistant. You can also handle other generic exceptions in your application the same way, read more about it at tapestry-exceptionpage guide (or DefaultRequestExceptionHandler documentation for T5.4). anon() and authc() etc. above refer to the Shiro filter names. See all Shiro filters available by default.
+0.4.1 also introduced a dependency to [tapestry-exceptionpage](http://www.tynamo.org/tapestry-security+guide/) (a version of it is built-in to T5.4). The security exceptions thrown from the filters annotation handlers are all handled by the same exception handler assistant. You can also handle other generic exceptions in your application the same way, read more about it at tapestry-exceptionpage guide (or [DefaultRequestExceptionHandler documentation](http:/tapestry.apache.org/5.4/apidocs/org/apache/tapestry5/internal/services/DefaultRequestExceptionHandler.html) for T5.4). anon() and authc() etc. above refer to the Shiro filter names. See [all Shiro filters available by default](http://shiro.apache.org/web.html#Web-AvailableFilters).
 
 ### Routing error codes in your web.xml
 
 In your web.xml, you most likely want to route 401 (Unauthorized) to your own error page instead of the container provided one, for example:
 
+	<web-app>
 	...
-	    <error-page>
-	        <error-code>401</error-code>
-	        <location>/error401</location>
-	    </error-page>
-	    <error-page>
-	        <error-code>404</error-code>
-	        <location>/error404</location>
-	    </error-page>
+		<error-page>
+		    <error-code>401</error-code>
+		    <location>/error401</location>
+		</error-page>
+		<error-page>
+		    <error-code>404</error-code>
+		    <location>/error404</location>
+		</error-page>
 	</web-app>
 
 Also, note that by the servlet spec, application filters don't handle error requests by default (Jetty, at least the old versions, didn't conform). So, to get the Tapestry filter to handle the ERROR request, you also need to configure:
@@ -144,7 +146,7 @@ Permissions are another interesting aspect of Shiro. Shiro's default WildCardPer
 	  }
 	}
 
-In your realm, you allocate individual permission strings to each user that are then matched against the permission strings from the annotations. For more information, read Shiro's documentation on permissions. While the permission concept is flexible, it still doesn't allow you to declaratively secure instances of data. You can programmatically check for instance level permissions but it's cumbersome to allocate the correct permissions and equally cumbersome to later verify them. Entity-Relationship Based Access Control (ERBAC) system allows declaring subject-instance security rules. For example, all users can read each other's profile data, but only modify their own. If you are using JPA, you are in luck since our implementation of ERBAC security concept, tapestry-security-jpa module allows securing your entities with simple annotations @RequiresAssociation and @RequiresRole, check out tapestry-security-jpa!
+In your realm, you allocate individual permission strings to each user that are then matched against the permission strings from the annotations. For more information, read [Shiro's documentation on permissions](http://shiro.apache.org/permissions.html). While the permission concept is flexible, it still doesn't allow you to declaratively secure instances of data. You can programmatically check for instance level permissions but it's cumbersome to allocate the correct permissions and equally cumbersome to later verify them. Entity-Relationship Based Access Control (ERBAC) system allows declaring subject-instance security rules. For example, all users can read each other's profile data, but only modify their own. If you are using JPA, you are in luck since our implementation of ERBAC security concept, tapestry-security-jpa module allows securing your entities with simple annotations @RequiresAssociation and @RequiresRole, check out [tapestry-security-jpa](http://www.tynamo.org/tapestry-security-jpa+guide/)!
 Security components
 
 There are often cases where it's not enough to simply secure the urls or the pages. If a user doesn't have a permission to invoke a particular action, it's a good practice to also hide it from his view. Tapestry-security module contains several built-in conditional components to make conditional rendering of your page templates and more fine-grained permission control easier.
@@ -197,11 +199,11 @@ Most likely, you will want to change these URLs to point to your own customized 
 
 ## More examples
 
-For more extensive examples, take a look at our full-featured integration test web app. See for example the Index page template and class and the AlphaService. Also, check out tynamo-federatedaccounts, an add-on module to tapestry-security for remote & merged authentication use cases, such as Oauth. We have a live example available for federatedaccounts but the example application also demonstrates other useful capabilities of tapestry-security, such as realm as a service, contributing multiple realms, interoperability between them, creating and using a CurrentUser application state object and using permissions. In the example, one realm is responsible for only authenticating users while another one is responsible for authorizing them. Clone the tynamo-example-federatedaccounts repo or browse the sources online, starting from AppModule
+For more extensive examples, take a look at our [full-featured integration test web app](https://github.com/tynamo/tapestry-security/tree/master/src/test/java/org/tynamo/security/testapp). See for example the [Index page template](https://github.com/tynamo/tapestry-security/blob/master/src/test/resources/org/tynamo/security/testapp/pages/Index.tml) and [class](https://github.com/tynamo/tapestry-security/blob/master/src/test/java/org/tynamo/security/testapp/pages/Index.java) and the [AlphaService](https://github.com/tynamo/tapestry-security/blob/master/src/test/java/org/tynamo/security/testapp/services/AlphaService.java). Also, check out [tynamo-federatedaccounts](http://www.tynamo.org/tynamo-federatedaccounts+guide/), an add-on module to tapestry-security for remote & merged authentication use cases, such as Oauth. We have a [live example available for federatedaccounts](http://tynamo-federatedaccounts.tynamo.org/) but the example application also demonstrates other useful capabilities of tapestry-security, such as realm as a service, contributing multiple realms, interoperability between them, creating and using a CurrentUser application state object and using permissions. In the example, one realm is responsible for only authenticating users while another one is responsible for authorizing them. Clone the [tynamo-example-federatedaccounts](https://github.com/tynamo/tynamo-example-federatedaccounts) repo or browse the sources online, starting from [AppModule](https://github.com/tynamo/tynamo-example-federatedaccounts/blob/master/src/main/java/org/tynamo/examples/federatedaccounts/services/AppModule.java).
 
 ### Case study: Securing Javamelody - An example of integrating a non-Tapestry library using a standard ServletFilter
 
-Javamelody is one of the best open-source server health monitoring packages available for Java webapps at the moment. Javamelody is implemented as a ServletFilter. Each request needs to pass through the filter to be accounted for. The same filter is also responsible for producing the reports by handling requests to "/monitoring" url directly. This imposes a problem with securing the "/monitoring" url. If you declare the Javamelody filter before Tapestry filter you couldn't secure the monitoring page (with a Tapestry-based security solution), and if you declared it after the Tapestry filter, the monitoring filter would never be invoked for requests handled by Tapestry. The solution is to inject the Monitoring filter into your security filter chain configuration, like so:
+[Javamelody](https://code.google.com/p/javamelody/) is one of the best open-source server health monitoring packages available for Java webapps at the moment. Javamelody is implemented as a ServletFilter. Each request needs to pass through the filter to be accounted for. The same filter is also responsible for producing the reports by handling requests to "/monitoring" url directly. This imposes a problem with securing the "/monitoring" url. If you declare the Javamelody filter before Tapestry filter you couldn't secure the monitoring page (with a Tapestry-based security solution), and if you declared it after the Tapestry filter, the monitoring filter would never be invoked for requests handled by Tapestry. The solution is to inject the Monitoring filter into your security filter chain configuration, like so:
 
 	@Contribute(HttpServletRequestFilter.class)
 	@Security
