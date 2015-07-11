@@ -45,7 +45,7 @@ If a simple exception type to page mapping doesn't do it for you, you can also c
 
 You can also specify context for the exception page. For generic exceptions, the context is taken from the exception class name minus the word "Exception" in case that's how the class name ends. For example, you have a following class:
 
-	public class SmtpNotResponding extends RuntimeException {
+	public class SmtpNotRespondingException extends RuntimeException {
 		...
 	}
 
