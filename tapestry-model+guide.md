@@ -28,7 +28,8 @@ To use the module, you need to add the following dependency to your pom.xml:
 However, if you are new to Tynamo and Tapestry, it maybe easier to follow our [Quick start](http://www.tynamo.org/Quickstart) to get set up quickly.
 
 <div markdown="1" class="alert alert-warning">
-This guide is a Wiki and only as good as you make it. Please contribute by adding more helpful explanations, correcting the wording and providing more examples. The guide will never be truly complete but even as is, it covers most aspects of Tynamo's tapestry-model module and is essential reading for anybody interested in model-driven CRUD applications. </div>
+This guide is a Wiki and only as good as you make it. Please contribute by adding more helpful explanations, correcting the wording and providing more examples. The guide will never be truly complete but even as is, it covers most aspects of Tynamo's tapestry-model module and is essential reading for anybody interested in model-driven CRUD applications. 
+</div>
 
 ## Outline
 {:.no_toc}
