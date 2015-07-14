@@ -2,7 +2,6 @@
 layout: page
 title: Overview
 ---
-
 Tynamo in a nutshell
 
 Tynamo is model-driven, full-stack web framework based on Tapestry 5.
