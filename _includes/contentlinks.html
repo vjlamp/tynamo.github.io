@@ -1,11 +1,18 @@
 <!-- contentlinks.html -->
-{% comment %}
+Read first
 <ul class="sidebar-page-list">
+	{% comment %}
   <li class="sidebar-nav-item{% if page.title == "Tynamo - Home" %} active{% endif %}">
     <a href="/">Home</a>
   </li>
+	{% endcomment %}
+  <li class="sidebar-nav-item{% if page.url == "/Quick+start/" %} active{% endif %}">
+    <a href="/Quick+start/">Quick start</a>
+  </li>
+  <li class="sidebar-nav-item{% if page.url == "/Overview/" %} active{% endif %}">
+    <a href="/Overview/">Overview</a>
+  </li>
 </ul>
-{% endcomment %}
 
 Guides
 <ul class="sidebar-page-list">
