@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><archetype-catalog>
+  <archetypes>
+    <archetype>
+      <groupId>org.tynamo</groupId>
+      <artifactId>tynamo-archetype</artifactId>
+      <version>0.5.1</version>
+      <description>Model-driven web framework based on Tapestry 5</description>
+    </archetype>
+  </archetypes>
+</archetype-catalog>
