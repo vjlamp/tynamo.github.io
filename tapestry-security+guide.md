@@ -1,6 +1,7 @@
 ---
 layout: guide
 title: tapestry-security
+repository_name: tapestry-security
 ---
 
 <div markdown="1" class="alert alert-info">
