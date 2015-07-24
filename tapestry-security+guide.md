@@ -148,7 +148,8 @@ Permissions are another interesting aspect of Shiro. Shiro's default WildCardPer
 	}
 
 In your realm, you allocate individual permission strings to each user that are then matched against the permission strings from the annotations. For more information, read [Shiro's documentation on permissions](http://shiro.apache.org/permissions.html). While the permission concept is flexible, it still doesn't allow you to declaratively secure instances of data. You can programmatically check for instance level permissions but it's cumbersome to allocate the correct permissions and equally cumbersome to later verify them. Entity-Relationship Based Access Control (ERBAC) system allows declaring subject-instance security rules. For example, all users can read each other's profile data, but only modify their own. If you are using JPA, you are in luck since our implementation of ERBAC security concept, tapestry-security-jpa module allows securing your entities with simple annotations @RequiresAssociation and @RequiresRole, check out [tapestry-security-jpa](http://www.tynamo.org/tapestry-security-jpa+guide/)!
-Security components
+
+## Security components
 
 There are often cases where it's not enough to simply secure the urls or the pages. If a user doesn't have a permission to invoke a particular action, it's a good practice to also hide it from his view. Tapestry-security module contains several built-in conditional components to make conditional rendering of your page templates and more fine-grained permission control easier.
 
