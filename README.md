@@ -26,7 +26,7 @@ Most regular content is simply added to the root. Note that several different la
 
 Each Tynamo module is kept in a separate Github repository under Tynamo organization. We are also using Github's release pages for documenting the changes in each release so make sure to create milestones and tags for each version.
 
-## Coding style
+### Coding style
 
 **We use tab to indent because that's what it's meant for**. No weird formatting rules, prefer concise over expanded and elaborated. We don't have a strict style guide so don't worry about it too much. Follow Tapestry coding style (not formatting!) where possible (for example *don't expect null, don't check for null*). Avoid unnecessary code like plague and refactor mercilessly. **Do not** auto-format (all lines of) existing code, **do not** use @author tags.
 
