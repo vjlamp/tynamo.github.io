@@ -1,10 +1,8 @@
 
-<div markdown="1" class="alert alert-warning">
 **Keep this page up to-to-date**
 
-Some crucial notes on how the project Tynamo is organized what new devs need to know about the project.
-Let's keep the development documentation to the minimum and on this page only as much as possible.
-</div>
+*Some crucial notes on how the project Tynamo is organized what new devs need to know about the project.
+Let's keep the development documentation to the minimum and on this page only as much as possible.*
 
 # Development notes
 
