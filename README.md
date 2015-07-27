@@ -1,118 +1,54 @@
-# Hyde
 
-Hyde is a brazen two-column [Jekyll](http://jekyllrb.com) theme that pairs a prominent sidebar with uncomplicated content. It's based on [Poole](http://getpoole.com), the Jekyll butler.
+<div markdown="1" class="alert alert-warning">
+**Keep this page up to-to-date**
 
-![Hyde screenshot](https://f.cloud.github.com/assets/98681/1831228/42af6c6a-7384-11e3-98fb-e0b923ee0468.png)
-
-
-## Contents
-
-- [Usage](#usage)
-- [Options](#options)
-  - [Sidebar menu](#sidebar-menu)
-  - [Sticky sidebar content](#sticky-sidebar-content)
-  - [Themes](#themes)
-  - [Reverse layout](#reverse-layout)
-- [Development](#development)
-- [Author](#author)
-- [License](#license)
-
-
-## Usage
-
-Hyde is a theme built on top of [Poole](https://github.com/poole/poole), which provides a fully furnished Jekyll setup—just download and start the Jekyll server. See [the Poole usage guidelines](https://github.com/poole/poole#usage) for how to install and use Jekyll.
-
-
-## Options
-
-Hyde includes some customizable options, typically applied via classes on the `<body>` element.
-
-
-### Sidebar menu
-
-Create a list of nav links in the sidebar by assigning each Jekyll page the correct layout in the page's [front-matter](http://jekyllrb.com/docs/frontmatter/).
-
-```
----
-layout: page
-title: About
----
-```
-
-**Why require a specific layout?** Jekyll will return *all* pages, including the `atom.xml`, and with an alphabetical sort order. To ensure the first link is *Home*, we exclude the `index.html` page from this list by specifying the `page` layout.
-
-
-### Sticky sidebar content
-
-By default Hyde ships with a sidebar that affixes it's content to the bottom of the sidebar. You can optionally disabled this by removing the `.sidebar-sticky` class from the sidebar's `.container`. Sidebar content will then normally flow from top to bottom.
-
-```html
-<!-- Default sidebar -->
-<div class="sidebar">
-  <div class="container sidebar-sticky">
-    ...
-  </div>
+Some crucial notes on how the project Tynamo is organized what new devs need to know about the project.
+Let's keep the development documentation to the minimum and on this page only as much as possible.
 </div>
 
-<!-- Modified sidebar -->
-<div class="sidebar">
-  <div class="container">
-    ...
-  </div>
-</div>
-```
+# Development notes
+
+## Preface
+
+The project is run mainly on Github infrastructure. The original home of Tynamo.org was at now defunct Codehaus and there may still be old links pointing either to http://tynamo.org/... (note without www. in front) or https://docs.codehaus.org/... If you spot one, please report/fix it. I (Kalle) have manually converted most of the guides to Markdown format using [Internet archive's Wayback Machine](https://web.archive.org/web/20150506154000/http://tynamo.org/). Most of the content is still available through it, including the old Confluence pages.
+
+## Website
+
+<http://www.tynamo.org> is implemented as Github pages, using Kramdown (a Markdown dialect that supports interspersed HTML tags, toc macro etc.) Each Tynamo module is kept in a separate Github repository under Tynamo organization. Github Pages for each separate module (the orphan gh_pages branches) is reserved for publishing the Maven site, most importantly for browsing javadocs and dependencies. The organization's Github Page repository, tynamo.github.io is a Jekyll powered site that contains all module specific guides and other development notes. The Jekyll layout isn't too pretty but works for mobile (or any narrow screen sizes), so if you make changes to the layout, make sure it still stays fluid.
+
+### Publishing Maven site
+
+Currently, module specific Maven sites are not published automatically. A project site should be publishable using the command *mvn site scm-publish:publish-scm*. The gh_pages branch needs to exist before (check notes on [this blog post about scm:publish](http://blog.progs.be/517/publishing-javadoc-to-github-using-maven) ). The artifact id of a module **must match** the repository name, otherwise the links to the Maven site won't work in the master layout.
+
+### tynamo.github.io
+
+Most regular content is simply added to the root. Note that several different layout are used to make it easier to differentiate between different types of content (such as the module specific guides, general development notes and other child pages that are not necessarily linked directly from the main layout).
+
+## Source
+
+Each Tynamo module is kept in a separate Github repository under Tynamo organization. We are also using Github's release pages for documenting the changes in each release so make sure to create milestones and tags for each version.
+
+## Coding style
+
+**We use tab to indent because that's what it's meant for**. No weird formatting rules, prefer concise over expanded and elaborated. We don't have a strict style guide so don't worry about it too much. Follow Tapestry coding style (not formatting!) where possible (for example *don't expect null, don't check for null*). Avoid unnecessary code like plague and refactor mercilessly. **Do not** auto-format (all lines of) existing code, **do not** use @author tags.
 
 
-### Themes
+### Continuous integration
 
-Hyde ships with eight optional themes based on the [base16 color scheme](https://github.com/chriskempson/base16). Apply a theme to change the color scheme (mostly applies to sidebar and links).
+We are using Travis for continuos integration, because it has a great integration with Github and extremely simple to set up. You just need to turn on the build at <https://travis-ci.org/profile/tynamo> and commit the .travis.yml file with contents "language: java" to tell it that this is a Java build.
 
-![Hyde in red](https://f.cloud.github.com/assets/98681/1831229/42b0b354-7384-11e3-8462-31b8df193fe5.png)
+### Release process
 
-There are eight themes available at this time.
+We are making staged releases to Sonatype's [OSSRH repository](http://central.sonatype.org/pages/ossrh-guide.html). You need a PGP key to sign the release, see [Apache's instructions for creating one](http://www.apache.org/dev/release-signing.html). Release process follows the standard Apache/Maven release process (see instructions) except our releases are staged at <http://central.sonatype.org/pages/ossrh-guide.html>.
 
-![Hyde theme classes](https://f.cloud.github.com/assets/98681/1817044/e5b0ec06-6f68-11e3-83d7-acd1942797a1.png)
+The usual issue to trip over is setting up your environment for providing PGP key & passphrase. The good news is that this is a one-time cost if you do it properly. Staging for us is mostly a final check before the release - if you are happy with the release, just go ahead and close and release from Nexus. If you are unsure about the contents, close the staging repo, then send the link to the dev list and ask others to verify. The usual Codehaus credentials work on Nexus.
 
-To use a theme, add anyone of the available theme classes to the `<body>` element in the `default.html` layout, like so:
+Every individual module has to be releasable by running mvn -B release:prepare release:perform (although up to you if you run it in parts and/or without -B), otherwise the release configuration is wrong. If there are failures in the release process, they should be fixed immediately for the next release. For tapestry-model, we currently keep archetype-catalog.xml at the root of the dav folder (to make it accessible via http://www.tynamo.org/archetype-catalog.xml). The archetype-catalog.xml file needs to be manually updated after the achetype module release. Versions of Tynamo dependencies in examples module also need to be manually updated.
 
-```html
-<body class="theme-base-08">
-  ...
-</body>
-```
+Announcements need to be done manually as well. Github picks up and displays the tags, edit Github release notes for the particular tag to edit release notes manually. Once you've released the module, it takes around 24 hours before the released artifacts are synched to Central. Announcement should be done only after the release is available through Central. This gives us time to do final manual check-ups after the release. If any major issues are found after the release, we should simply abandon the release, leave it unannounced and push out a new release. You should always make the **announcements in at least four places**: on our home page (as a Confluence blog post), users@tapestry.apache.org, user@tynamo.codehaus.org and on Twitter (kaosko owns the twitter handle tynamo_org but you can use your own handle). Twitter announcements need to use the hashtag *#tapestry5*.
 
-To create your own theme, look to the Themes section of [included CSS file](https://github.com/poole/hyde/blob/master/public/css/hyde.css). Copy any existing theme (they're only a few lines of CSS), rename it, and change the provided colors.
+If the archetype GA coordinates changes or we publish other archetypes, we need to update the Maven archetype wiki page.
 
-### Reverse layout
+## Branding and marketing
 
-![Hyde with reverse layout](https://f.cloud.github.com/assets/98681/1831230/42b0d3ac-7384-11e3-8d54-2065afd03f9e.png)
-
-Hyde's page orientation can be reversed with a single class.
-
-```html
-<body class="layout-reverse">
-  ...
-</body>
-```
-
-
-## Development
-
-Hyde has two branches, but only one is used for active development.
-
-- `master` for development.  **All pull requests should be to submitted against `master`.**
-- `gh-pages` for our hosted site, which includes our analytics tracking code. **Please avoid using this branch.**
-
-
-## Author
-
-**Mark Otto**
-- <https://github.com/mdo>
-- <https://twitter.com/mdo>
-
-
-## License
-
-Open sourced under the [MIT license](LICENSE.md).
-
-<3
+Any project, free-of-charge or not, needs to market their offerings. Tynamo.org has a strong brand recognition within the Tapestry community but is practically non-existent in the wider web, even just among other Java developers. We simply need more back links to Tynamo.org from a variety of content, not just from tapestry.apache.org and stackoverflow.com. Any of the confluence pages need to mention the following keywords at least once: **Apache, Tapestry 5, Java and framework**, and include one or more links to **<http://www.tynamo.org/>**.
