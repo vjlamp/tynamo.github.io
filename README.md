@@ -33,7 +33,7 @@ Each Tynamo module is kept in a separate Github repository under Tynamo organiza
 
 ### Continuous integration
 
-We are using Travis for continuos integration, because it has a great integration with Github and extremely simple to set up. You just need to turn on the build at <https://travis-ci.org/profile/tynamo> and commit the .travis.yml file with contents "language: java" to tell it that this is a Java build.
+We are using Travis for continuous integration, because it has a great integration with Github and extremely simple to set up. You just need to turn on the build at <https://travis-ci.org/profile/tynamo> and commit the .travis.yml file with contents "language: java" to tell it that this is a Java build.
 
 ### Release process
 
