@@ -6,5 +6,5 @@ Thanks to the enthusiastic, borderline pestering community :), yet another tynam
 
 [Release notes](https://github.com/tynamo/tynamo-federatedaccounts/releases/tag/tynamo-federatedaccounts-parent-0.5.0)
 
-- Upgrade to T5.4 #1
-- Rewrite the CollapsiblePanel component as a requirejs module #2
+- Upgrade to T5.4 [#1](https://github.com/tynamo/tynamo-federatedaccounts/issues/1)
+- Rewrite the CollapsiblePanel component as a requirejs module [#2](https://github.com/tynamo/tynamo-federatedaccounts/issues/2)

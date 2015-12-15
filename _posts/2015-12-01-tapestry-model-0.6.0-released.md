@@ -2,7 +2,7 @@
 layout: post
 title: tapestry-model 0.6.0 released!
 ---
-Finally, we have an officially compatible release tapestry-model for T5.4 available. We had one long running issue with the changes in tapestry core and it wasn't until T5.4-rc1 before it was all sorted out. The official release note is here but there's been lots of great functional changes to the core.
+Finally, we have an officially compatible release tapestry-model for T5.4 available. We had one long running issue with the changes in tapestry core and it wasn't until T5.4-rc1 before it was all sorted out. The official release note is short but there's been lots of great functional changes to the core.
 
 **Release notes**
 
