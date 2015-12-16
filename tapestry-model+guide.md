@@ -25,7 +25,7 @@ To use the module, you need to add the following dependency to your pom.xml:
 	  <version>0.5.1</version>
 	</dependency>
 
-However, if you are new to Tynamo and Tapestry, it maybe easier to follow our [Quick start](http://www.tynamo.org/Quickstart) to get set up quickly.
+However, if you are new to Tynamo and Tapestry, it maybe easier to follow our [Quick start](http://www.tynamo.org/Quick+start/) to get set up quickly.
 
 <div markdown="1" class="alert alert-warning">
 This guide is a Wiki and only as good as you make it. Please contribute by adding more helpful explanations, correcting the wording and providing more examples. The guide will never be truly complete but even as is, it covers most aspects of Tynamo's tapestry-model module and is essential reading for anybody interested in model-driven CRUD applications. 
@@ -39,7 +39,7 @@ This guide is a Wiki and only as good as you make it. Please contribute by addin
 
 ## Creating your domain model
 
-At this point, you should have gone through at least the [Quick start](http://www.tynamo.org/Quickstart) and preferably [Overview](http://www.tynamo.org/Overview) as well, and have your environment set-up and be initially familiar with Tynamo, Tapestry and Maven. Start by figuring out what your business objects are, what the relationships between them are and then implement simple entities for each with minimal annotations. Keep your application in a running state as much as possible and work in small increments. Once you've verified your entities are recognized and you can add, update and delete them in your web application, start implementing the relationships between them using JPA (or Hibernate) annotations.
+At this point, you should have gone through at least the [Quick start](http://www.tynamo.org/Quick+start/) and preferably [Overview](http://www.tynamo.org/Overview) as well, and have your environment set-up and be initially familiar with Tynamo, Tapestry and Maven. Start by figuring out what your business objects are, what the relationships between them are and then implement simple entities for each with minimal annotations. Keep your application in a running state as much as possible and work in small increments. Once you've verified your entities are recognized and you can add, update and delete them in your web application, start implementing the relationships between them using JPA (or Hibernate) annotations.
 
 ### Implementing Tynamo "POJOs"
 
