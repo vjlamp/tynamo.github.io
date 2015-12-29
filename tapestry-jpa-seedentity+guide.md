@@ -3,4 +3,4 @@ layout: guide
 title: tapestry-jpa-seedentity
 repository_name: tapestry-jpa-seedentity
 ---
-{% include_relative tapestry-seedentity.md %}
+{% include tapestry-seedentity.md %}
