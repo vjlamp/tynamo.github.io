@@ -4,15 +4,13 @@ title: tapestry-conversations
 repository_name: tapestry-conversations
 ---
 <div markdown="1" class="alert alert-info">
-Version status: 0.1.2 release stable, in production
+Version status: 0.2.0 for T5.4 and 0.1.3 for pre-T5.4. Releases stable, in production
 
-0.1.2 is tested to work with T5.1.0.5 and T5.2.1, T5.2.2 and T5.2.3!
+0.1.3 is tested to work with T5.1.0.5 and T5.2.1, T5.2.2 and T5.2.3!
 
 (org.trailsframework:tapestry-conversations:0.0.3 last release to work in 5.0.x Tapestry)
 
-0.1.x interfaces won't change.
-
-0.2.x might introduce new onStartConversation and onContinueConversation events instead of relying on onActivate
+0.3.x might introduce new onStartConversation and onContinueConversation events instead of relying on onActivate
 
 Want to see conversations in action? Check out our live tapestry-conversations example!
 </div>
@@ -40,7 +38,7 @@ To use the feature, you need to add the following dependency to your pom.xml:
 	<dependency>
 	  <groupId>org.tynamo</groupId>
 	  <artifactId>tapestry-conversations</artifactId>
-	  <version>0.1.1</version>
+	  <version>0.2.0</version>
 	</dependency>
 
 Then, on the page you need to add a org.tynamo.conversations.services.ConversationManager:
