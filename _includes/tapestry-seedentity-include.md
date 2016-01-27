@@ -1,13 +1,3 @@
-No more generating and running SQL seed scripts! tapestry-hibernate-seedentity module is a simple, object-oriented way to seed your database either for development or production environment or both. This works for any Tapestry5 application using Hibernate and is independent of the rest of Tynamo modules.
-
-To use the feature, you need to add the following dependency to your pom.xml:
-
-	<dependency>
-	  <groupId>org.tynamo</groupId>
-	  <artifactId>tapestry-hibernate-seedentity</artifactId>
-	  <version>0.1.3</version>
-	</dependency>
-
 Simply contribute your entities in the right order (starting from the leaf node) and you are done! Take a look at the following example:
 
 	@Contribute(SeedEntity.class)
@@ -40,7 +30,7 @@ Simply contribute your entities in the right order (starting from the leaf node)
 		configuration.add("testuser1", user);
 	}
 
-The module uses standard Hibernate annotations
+The module uses standard JPA/Hibernate annotations
 
 	@NaturalId, 
 	@Column(unique = true) or 
