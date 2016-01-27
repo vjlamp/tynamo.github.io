@@ -1,6 +1,6 @@
 ---
 layout: guide
-title: tapestry-seedentity
+title: tapestry-hibernate-seedentity
 repository_name: tapestry-hibernate-seedentity
 redirect_from: "/tapestry-hibernate-seedentity/"
 ---
