@@ -5,7 +5,7 @@ repository_name: tapestry-security
 ---
 
 <div markdown="1" class="alert alert-info">
-**Version status: 0.6.2 for T5.4, 0.5.1 stable for T5.3, 0.4.6 stable for T5.2 and 0.2.2 for T5.1**
+**Version status: 0.6.4 for T5.4, 0.5.1 stable for T5.3, 0.4.6 stable for T5.2 and 0.2.2 for T5.1**
 
 tapestry-security module is based on and depends on Apache Shiro. 0.4.1 depends on Apache Shiro 1.2.0, earlier versions depend on 1.1.0
 
