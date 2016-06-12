@@ -7,9 +7,7 @@ repository_name: tapestry-security
 <div markdown="1" class="alert alert-info">
 **Version status: 0.6.6 for T5.4, 0.5.1 stable for T5.3, 0.4.6 stable for T5.2 and 0.2.2 for T5.1**
 
-tapestry-security module is based on and depends on Apache Shiro. 0.4.1 depends on Apache Shiro 1.2.0, earlier versions depend on 1.1.0
-
-Source and issue management moved to Github!
+tapestry-security module is based on and depends on Apache Shiro. 0.4.1 and up depends on Apache Shiro 1.2.x, earlier versions depend on 1.1.0
 
 Critical issues will be fixed for 0.4.x, feature development only for 0.6.x versions. Versions before 0.4.0 are not maintained anymore.
 
@@ -59,6 +57,17 @@ Shiro supports url-based permission checking out of the box. Tapestry-security a
 Shiro's default configuration model uses an INI file (a property file with sections). However, Tapestry-security 0.4.0 introduced a Tapestry-style configuration through contributions and completely removed support for ini-style configuration. Tapestry-style all-in-Java configuration has many benefits, including type checking, run-time filter re-configuration (should you ever need it...) and better performance (indirectly - 0.4.0 supplies its own "Shiro" filters - this feature enhancement may be pushed upstream in Shiro 2.0 - see configuration per filter instance in Version+2+Brainstorming if interested).
 
 For 0.3.x and earlier versions, you can use a standard Shiro INI configuration file (see Shiro's documentation for more info) with tapestry-security. All versions support annotation-based security. The simplest and most typical security models are based on url and role permissions, see the following version-specific sections for examples on them.
+
+### Secure remember me cookies
+
+In case you plan on using [rememberMe cookies - a feature of Shiro](http://shiro.apache.org/authentication.html#Authentication-Rememberedvs.Authenticated), you should know that only Integer, Long and String primitive types are allowed as security principals by default. You can contribute additional types with:
+
+	@Contribute(Serializer.class)
+	public static void addSafePrincipalTypes(Configuration<Class> configuration) {
+		configuration.add(UID.class);
+	}
+	
+You should also configure a base64 coded, 16 byte divisable AES cipher key for encrypting the cookie data to make sure you are not leaving your webapplication [open to attack via Java serialization vulnerability](http://www.darkreading.com/informationweek-home/why-the-java-deserialization-bug-is-a-big-deal/d/d-id/1323237). You can contribute SecuritySymbols.REMEMBERME_CIPHERKERY as a Tapesty symbol. Even if you haven't, tapestry-security will try use SymbolConstants.HMAC_PASSPHRASE as a cipher key, adding padding as necessary (you'll get a warning in that case). If you haven't configured either, an ERROR is logged in the console and the issued rememberMe cookies are invalidated at JVM restart. This is one-time setup for the lifetime of your application.
 
 ### Configuration through contributions
 
