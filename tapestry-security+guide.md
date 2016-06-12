@@ -5,7 +5,7 @@ repository_name: tapestry-security
 ---
 
 <div markdown="1" class="alert alert-info">
-**Version status: 0.6.4 for T5.4, 0.5.1 stable for T5.3, 0.4.6 stable for T5.2 and 0.2.2 for T5.1**
+**Version status: 0.6.6 for T5.4, 0.5.1 stable for T5.3, 0.4.6 stable for T5.2 and 0.2.2 for T5.1**
 
 tapestry-security module is based on and depends on Apache Shiro. 0.4.1 depends on Apache Shiro 1.2.0, earlier versions depend on 1.1.0
 
@@ -31,7 +31,7 @@ To use the feature, you need to add the following dependency to your pom.xml:
     <dependency>
       <groupId>org.tynamo</groupId>
       <artifactId>tapestry-security</artifactId>
-      <version>0.6.4</version>
+      <version>0.6.6</version>
     </dependency>
 
 Apache Shiro, the security framework that tapestry-security is based on, is modular and extensible, but to get started, you need to understand just three key Shiro concepts: **realms, filters** and **security configuration**. A realm is responsible for authenticating and authorizing users, so you at least need to configure a ready-made realm, or, if you are authenticating users against your own custom database, likely need to implement your own custom realm. Typically, in your AppModule you provide a realm configuration such as:
