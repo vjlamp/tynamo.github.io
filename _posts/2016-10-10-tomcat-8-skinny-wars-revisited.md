@@ -3,7 +3,7 @@ layout: post
 title: Tomcat 8 and skinny war deployment revisited
 ---
 
-While Dokku, containerization and the like steel all of the deployment hype these days, the good old skinny wars are still alive and kicking. I was recently ~~giving CPR to~~ maintaining an older Tapestry 5 app that was moved from one of those ultra-cool but expensive PaaS platforms to an el cheapo VPS server (because nowadays, they offer just ridiculously good price/performance ratio and for whatever reason, the app didn't achieve world domination at its time).
+While Dokku, containerization and the like steal all of the deployment hype these days, the good old skinny wars are still alive and kicking. I was recently ~~giving CPR to~~ maintaining an older Tapestry 5 app that was moved from one of those ultra-cool but expensive PaaS platforms to an el cheapo VPS server (because nowadays, they offer just ridiculously good price/performance ratio and for whatever reason, the app didn't achieve world domination at its time).
 
 The PaaS had its own proprietary deployment API but the app had everything and the kitchen sink as dependencies so I quickly got tired of deploying the whole WAR when less than 1% of it had really changed. Since I've done plenty of skinny war deployments in the past and this app was in maintenance mode anyway, I figured a skinny WAR was the way to go, only to find out that the deployment script I had copied from another old project just didn't work anymore in Tomcat 8.
 
