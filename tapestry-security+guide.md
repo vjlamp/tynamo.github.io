@@ -5,13 +5,15 @@ repository_name: tapestry-security
 ---
 
 <div markdown="1" class="alert alert-info">
-**Version status: 0.6.6 for T5.4, 0.5.1 stable for T5.3, 0.4.6 stable for T5.2 and 0.2.2 for T5.1**
+**Version status: 0.7.0-> for T5.4, 0.5.1 stable for T5.3, 0.4.6 stable for T5.2 and 0.2.2 for T5.1**
 
 tapestry-security module is based on and depends on Apache Shiro. 0.4.1 and up depends on Apache Shiro 1.2.x, earlier versions depend on 1.1.0
 
-Critical issues will be fixed for 0.4.x, feature development only for 0.6.x versions. Versions before 0.4.0 are not maintained anymore.
+Critical issues will be fixed for 0.4.x, feature development only for 0.6.x-> versions. Versions before 0.4.0 are not maintained anymore.
 
 0.4.0 introduced fully Tapestry-style configuration and performance improvements.
+
+0.7.0 introduces a backwards incompatible change, the SecurityConfiguration contribution is changed from Configuration to OrderedConfiguration!
 
 </div>
 
@@ -29,7 +31,7 @@ To use the feature, you need to add the following dependency to your pom.xml:
     <dependency>
       <groupId>org.tynamo</groupId>
       <artifactId>tapestry-security</artifactId>
-      <version>0.6.6</version>
+      <version>0.7.0</version>
     </dependency>
 
 Apache Shiro, the security framework that tapestry-security is based on, is modular and extensible, but to get started, you need to understand just three key Shiro concepts: **realms, filters** and **security configuration**. A realm is responsible for authenticating and authorizing users, so you at least need to configure a ready-made realm, or, if you are authenticating users against your own custom database, likely need to implement your own custom realm. Typically, in your AppModule you provide a realm configuration such as:
@@ -75,6 +77,13 @@ You should also configure a base64 coded, 16 byte divisable AES cipher key for e
 
 	// Starting from 0.4.6, you can also use a marker annotation:
 	// @Contribute(HttpServletRequestFilter.class) @Security public static void securePaths(...)
+	// Starting from 0.7.0, you need to contribute to OrderedConfiguration (it was always an ordered configuration but the the project
+	// was started before OrderedConfiguration was invented in T5.3
+	public static void contributeSecurityConfiguration(Configuration<SecurityFilterChain> configuration,
+				SecurityFilterChainFactory factory) {
+			// OrderedConfiguration must be named, so they can be overridden later
+			configuration.add("signup-anon", factory.createChain("/authc/signup").add(factory.anon()).build());
+	// or, prior to 0.7.0:
 	public static void contributeSecurityConfiguration(Configuration<SecurityFilterChain> configuration,
 				SecurityFilterChainFactory factory) {
 			// /authc/** rule covers /authc , /authc?q=name /authc#anchor urls as well
