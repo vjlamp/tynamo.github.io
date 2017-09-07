@@ -79,7 +79,7 @@ You should also configure a base64 coded, 16 byte divisable AES cipher key for e
 	// @Contribute(HttpServletRequestFilter.class) @Security public static void securePaths(...)
 	// Starting from 0.7.0, you need to contribute to OrderedConfiguration (it was always an ordered configuration but the the project
 	// was started before OrderedConfiguration was invented in T5.3
-	public static void contributeSecurityConfiguration(Configuration<SecurityFilterChain> configuration,
+	public static void contributeSecurityConfiguration(OrderedConfiguration<SecurityFilterChain> configuration,
 				SecurityFilterChainFactory factory) {
 			// OrderedConfiguration must be named, so they can be overridden later
 			configuration.add("signup-anon", factory.createChain("/authc/signup").add(factory.anon()).build());
