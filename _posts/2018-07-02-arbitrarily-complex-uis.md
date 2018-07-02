@@ -7,8 +7,11 @@ Two years ago I read a blog post about [some guy writing a Tetris webapp with Cl
 
 One of the projects I developed is Coachaide. In all honesty, it did take a bit longer than two hours to "complete", but I'll use it as an example here because it's still a simple hobby project. I had written the first, client-side/in-browser only version as an experiment in two weeks last Summer. At the beginning of the year, I had some time to kill, so I added touch gestures, simplified and reworked the UI, generalized the concept to support multiple game types, added multiple balls *and* wrote user management and a whole server side for it, complete with Postgres backed database in three manic weeks (thanks family for putting up with me!).
 
-<iframe markdown="0" style="float: right;width: 40%;height: 500px;min-width: 300px;" src="https://soccer.coachaide.com" frameborder="0" allowfullscreen="true">
+<div markdown="0" style="float: right;width: 40%;height: 500px;min-width: 300px;">
+<div><a target="blank" href="https://soccer.coachaide.com/shared/play/4087e526-1d7b-400e-b12c-4b171c5c796b"><i>Open the app in new window</i></a></div>
+<iframe style="width: 100%; height: 100%" src="https://soccer.coachaide.com/shared/play/4087e526-1d7b-400e-b12c-4b171c5c796b" frameborder="0">
 </iframe>
+</div>
 
 The world is of course full scrappy little tacticboards, but far fewer of the more intelligent user interfaces like the one in Coachaide. It understands passes, tracks players positions in time, works online and offline (because it aggressively caches all resources on the client thanks to the programmable cache of a progressive webapp), scales to any screen size (go ahead and try resizing your browser) and works on all modern devices with touch or mouse interfaces. Certainly you can implement the same with older and more conventional web technologies, but the effort required for a free-to-use tool is too big and too costly, which is why so many of these hobby projects stay in the drawer, never quite reaching the "good-enough-to-publish" state.
 
