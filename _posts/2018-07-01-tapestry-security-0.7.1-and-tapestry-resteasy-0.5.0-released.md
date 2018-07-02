@@ -12,4 +12,4 @@ As a side-note, while our Maven & [OSS](https://www.sonatype.com/nexus-repositor
 Enjoy!
 
 <div markdown="1">
-<iframe width="560" height="315" src="https://soccer.coachaide.com" frameborder="0" allowfullscreen></iframe></div>
+<iframe width="560" height="315" src="https://soccer.coachaide.com" frameborder="0" allowfullscreen="true"></iframe></div>

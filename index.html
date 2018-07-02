@@ -37,7 +37,10 @@ title: Tynamo - Home
     {% elsif post.description %}
     {{ post.description }}
     {% else %}
+    {% comment %}
     {{ post.excerpt }}
+    {% endcomment %}
+    {{ post.content }}
     {% endif %}
     {% endif %}
   </div>
