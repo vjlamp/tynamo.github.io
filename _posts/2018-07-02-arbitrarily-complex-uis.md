@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Arbitrarily complex UIs
+title: Arbitrarily complex user interfaces
 ---
 
 Two years ago I read a blog post about [some guy writing a Tetris webapp with Clojure in two hours](http://timothypratley.blogspot.com/2015/07/you-should-be-using-figwheelreagent.html) and I rembember thinking *there's no way*. There's simply no way I can develop anything that complete in just two hours. But it was right then and there I decided to pick up Clojure. In the last 12 months, I've not only developed, but published three Clojure/Script projects and I can confidently say I'm able to develop at the same pace I'm designing an application.
