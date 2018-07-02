@@ -60,6 +60,6 @@ PS. Don't worry, haven't forgotten about Tapestry. I'll be happy to continue mai
 
 PPS. Originally, there were no "neutral" players in Coachaide. It took me 30 mins to implement the end-to-end functionality, from the button in the UI to persistence changes for storing the new info in the DB.
 
-PPPS. I hadn't planned on localizing Coachaide to multiple versions, but after finding out about [tempura](https://github.com/ptaoussanis/tempura), I decided ti o give it a go, nand ended up internationalizing and localizing it to Finnish over one weekend. Thanks to my neighbor Laura, there is also Spanish translations!
+PPPS. I hadn't planned on localizing Coachaide to multiple versions, but after finding out about [tempura](https://github.com/ptaoussanis/tempura), I decided to give it a go, and ended up internationalizing and localizing it to Finnish over one weekend. Thanks to my neighbor Laura, there is also Spanish translation!
 
-PPPPS. Before publishing this, I decided implemnt full-text search for Coachaide. That took a bit longer, but just for the heck of it, I implemented **both** remote and local (as in client-side) full-text searches for it!
+PPPPS. Before publishing this, I decided implement full-text search for Coachaide. That took a bit longer, but just for the heck of it, I implemented **both** remote and local (as in client-side) full-text searches for it!
