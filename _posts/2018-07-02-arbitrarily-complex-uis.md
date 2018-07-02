@@ -65,4 +65,4 @@ PPS. Originally, there were no "neutral" players in Coachaide. It took me 30 min
 
 PPPS. I hadn't planned on localizing Coachaide but after finding out about [tempura](https://github.com/ptaoussanis/tempura), I decided to give it a go, and ended up internationalizing and localizing it to Finnish over one weekend. Thanks to my neighbor Laura, there is also Spanish translation!
 
-PPPPS. Before publishing this, I decided implement full-text search for Coachaide. That took a bit longer, but just for the heck of it, I implemented **both** remote and local (as in client-side) full-text searches for it!
+PPPPS. Before publishing this, I decided to implement full-text search for Coachaide. That took a bit longer, but just for the heck of it, I implemented **both** remote and local (as in client-side) full-text searches for it!
