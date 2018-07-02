@@ -28,7 +28,7 @@ To use tapestry-resteasy (an independent module of Tynamo), you need to add the 
 	<dependency>
 	    <groupId>org.tynamo</groupId>
 	    <artifactId>tapestry-resteasy</artifactId>
-	    <version>0.4.0</version>
+	    <version>0.5.0</version>
 	</dependency>
 
 ### No need to edit your web.xml.
@@ -303,4 +303,5 @@ Check google for more information: <http://www.google.com/search?hl=en&q=com.sun
 | 0.3.1	| 5.3.x	| 3.0-beta-4 |
 | 0.3.2	| 5.3.x	| 3.0.1.Final	|
 | 0.4.0	| 5.4.x	| 3.0.7.Final	|
+| 0.5.0	| 5.4.x	| 3.1.4.Final	|
 {: .table .table-condensed .table-bordered}
