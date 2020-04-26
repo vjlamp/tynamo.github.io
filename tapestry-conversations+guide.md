@@ -159,13 +159,13 @@ Using ConversationModerator component
 
 There are several parameters that you can set that change the behavior of the component, the following table should explain them:
 
----
 | name | description | default value | 
+| ---  | ----------- | ------------- |
 | idlecheck | the initial delay after which component checks if the current conversation has become idle. If idlecheck is set, the timing for subsequent checks depends on the keepalive value and the conversation's maxIdleSeconds value | 15 |
 | warnbefore | the initial delay after which component checks if the current conversation has become idle | 15 |
-| warnbeforehandler | | a string identifier for the Javascript function to be called if warnbefore is set. Of form [object.property.]function. If the identifier specifies context (e.g object.property) this is set to that context. If not set, but warnbefore is set, displays an alert box | null |
+| warnbeforehandler | a string identifier for the Javascript function to be called if warnbefore is set. Of form [object.property.]function. If the identifier specifies context (e.g object.property) this is set to that context. If not set, but warnbefore is set, displays an alert box | null |
 | endedhandler | Similar to warnbeforehandler, but called after the conversation has becomed idle. | null |
-|keepalive | Set to make idlecheck to reset the idle counter. Useful when you want to make sure a conversation doesn't become idle until user closes the browser | false |
+|keepalive | Set to make idlecheck reset the idle counter. Useful when you want to make sure a conversation doesn't become idle until user closes the page | false |
 
 In essence, a ConversationModerator allows you to maintain the memory resources more tightly on the server with small increase in network traffic. You might wonder why you couldn't just use browser's onUnload event to end conversations. Obviously that won't work if users just leave the pages open in their browsers (as people frequently do), but more importantly it will not work either when users refresh the page or when a user invokes a (non-ajax) action on the page, causing redirect-after-post. The few extra requests the component makes for more conservative server session management should be well worth it.
 
