@@ -4,7 +4,7 @@ title: tapestry-security-jpa
 repository_name: tapestry-security-jpa
 ---
 <div markdown="1" class="alert alert-info">
-**Version status: 0.0.4 beta**
+**Version status: 0.2.0 **
 </div>
  
 ## Overview
@@ -18,7 +18,7 @@ To use the feature, you need to add the following dependency to your pom.xml:
 	<dependency>
 	  <groupId>org.tynamo.security</groupId>
 	  <artifactId>tapestry-security-jpa</artifactId>
-	  <version>0.0.4</version>
+	  <version>0.2.0</version>
 	</dependency>
 
 The module doesn't require mandatory configuration. If you don't explicitly specify the realm and the type of principal to use with relationship-based security rules, the implementation will use the primary principal of the subject. You can explicitly configure the principal to use in the security check:
@@ -43,6 +43,18 @@ Tapestry-security-jpa allows you to secure JPA entities with two simple annotati
 	  @OneToOne
 	  private User owner;
 	}
+	
+Walking through the association walks as well, e.g:
+
+	@Entity
+	@RequiresAssociation("team.managers")
+	public class Player {
+	 
+	  @ManyToOne
+	  private Team team;
+	}
+
+However, note that ManyToMany association, as *managers* above only work for the top-most association (somewhat understandably).
 
 The module uses either the configured principal or the primary principal (if not explicitly stated) of the current Subject as the @Id attribute of the associated entity to perform the security check. For find() operations, this means that the SecureEntityManager adds an "id equals" criteria to the find() query. If the required relationship doesn't exist, null is returned as if the entity never existed. The added benefit of @RequiresAssociation is that you can find entities secured with @RequiresAssociation by passing a null id, only relying on the association (*note that this is against the EntityManager specification, which states that IllegalArgumentException should be thrown if the id parameter is null!*). However, for write operations, a *EntitySecurityException* is thrown before the operation is executed if the required association doesn't exist. From security perspective, explicit errors make sense for write operations, since the user specifies the entity relationship whereas for read operations, the information is hidden if the implicitly required relationship doesn't exist; in other words errors are handled the same way as you would typically handle them in REST-based write and read operations.
 
@@ -50,4 +62,11 @@ The module uses either the configured principal or the primary principal (if not
 
 EntityManager doesn't provide a find(...) operation for returning all entities of a particular type. However, @RequiresAssociation works equally well for securing access to entities with @ManyToOne association the the owning entity. The module provides an *AssociatedEntities* service and its operation List<?> findAll(EntityManager em, Class<?> entityClass) for returning all associated entities.
 
-If there's no SecurityManager bound to the thread (e.g. when executing batch operations), SecureEntityManager simply delegates back to the original SecurityManager, i.e. all entity-based access control is turned off.
+If there's no SecurityManager bound to the thread (e.g. when executing batch operations), SecureEntityManager simply delegates back to the original SecurityManager, i.e. all entity-based access control is turned off. You can explicitly turn off security for an individual call with:
+
+	return securityService.invokeWithSecurityDisabled(new Callable<List<T>>() {
+		@Override
+		public List<T> call() {
+			return myservice.getAllEntities(myCriteria);
+		}
+	});
