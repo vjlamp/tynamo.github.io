@@ -4,13 +4,9 @@ title: tapestry-conversations
 repository_name: tapestry-conversations
 ---
 <div markdown="1" class="alert alert-info">
-Version status: 0.2.0 for T5.4 and 0.1.3 for pre-T5.4. Releases stable, in production
+Version status: 0.3.0 for T5.5, 0.2.0 for T5.4 and 0.1.3 for pre-T5.4. Releases stable, in production
 
 0.1.3 is tested to work with T5.1.0.5 and T5.2.1, T5.2.2 and T5.2.3!
-
-(org.trailsframework:tapestry-conversations:0.0.3 last release to work in 5.0.x Tapestry)
-
-0.3.x might introduce new onStartConversation and onContinueConversation events instead of relying on onActivate
 
 Want to see conversations in action? Check out our live tapestry-conversations example!
 </div>
@@ -38,7 +34,7 @@ To use the feature, you need to add the following dependency to your pom.xml:
 	<dependency>
 	  <groupId>org.tynamo</groupId>
 	  <artifactId>tapestry-conversations</artifactId>
-	  <version>0.2.0</version>
+	  <version>0.3.0</version>
 	</dependency>
 
 Then, on the page you need to add a org.tynamo.conversations.services.ConversationManager:
@@ -166,6 +162,7 @@ There are several parameters that you can set that change the behavior of the co
 | warnbeforehandler | a string identifier for the Javascript function to be called if warnbefore is set. Of form [object.property.]function. If the identifier specifies context (e.g object.property) this is set to that context. If not set, but warnbefore is set, displays an alert box | null |
 | endedhandler | Similar to warnbeforehandler, but called after the conversation has becomed idle. | null |
 |keepalive | Set to make idlecheck reset the idle counter. Useful when you want to make sure a conversation doesn't become idle until user closes the page | false |
+{: .table .table-condensed .table-bordered}
 
 In essence, a ConversationModerator allows you to maintain the memory resources more tightly on the server with small increase in network traffic. You might wonder why you couldn't just use browser's onUnload event to end conversations. Obviously that won't work if users just leave the pages open in their browsers (as people frequently do), but more importantly it will not work either when users refresh the page or when a user invokes a (non-ajax) action on the page, causing redirect-after-post. The few extra requests the component makes for more conservative server session management should be well worth it.
 

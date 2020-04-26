@@ -28,7 +28,7 @@ To use tapestry-resteasy (an independent module of Tynamo), you need to add the 
 	<dependency>
 	    <groupId>org.tynamo</groupId>
 	    <artifactId>tapestry-resteasy</artifactId>
-	    <version>0.5.0</version>
+	    <version>0.6.0</version>
 	</dependency>
 
 ### No need to edit your web.xml.
@@ -234,7 +234,14 @@ public static void configureRestResources(Configuration<Object> singletons, Relo
 	singletons.add(reloadableEchoResource);
 }
 
+### Swagger integration
 
+Add dependency to org.tynamo:tapestry-resteasy-swagger:0.0.2 (currently)
+
+Integrates with swagger2 (openAPI v3). Fully [configurable with an external configuration file](https://github.com/swagger-api/swagger-core/wiki/Swagger-2.X---Integration-and-Configuration#configuration).
+
+OpenAPI spec is published under */<rest-path>/openapi.json* or */<rest-path>/openapi.yaml*
+Swagger UI is available at */webjars/swagger-ui/3.25.0?url=/mycustomresteasyprefix/openapi.json*
 
 ### Enjoy
 
@@ -304,4 +311,5 @@ Check google for more information: <http://www.google.com/search?hl=en&q=com.sun
 | 0.3.2	| 5.3.x	| 3.0.1.Final	|
 | 0.4.0	| 5.4.x	| 3.0.7.Final	|
 | 0.5.0	| 5.4.x	| 3.1.4.Final	|
+| 0.6.0	| 5.5.x	| 3.11.2.Final |
 {: .table .table-condensed .table-bordered}
