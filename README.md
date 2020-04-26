@@ -16,7 +16,7 @@ The project is run mainly on Github infrastructure. The original home of Tynamo.
 
 ### Publishing Maven site
 
-Currently, module specific Maven sites are not published automatically. A project site should be publishable using the command *mvn site scm-publish:publish-scm*. The gh_pages branch needs to exist before (check notes on [this blog post about scm:publish](http://blog.progs.be/517/publishing-javadoc-to-github-using-maven) ). The artifact id of a module **must match** the repository name, otherwise the links to the Maven site won't work in the master layout.
+Currently, module specific Maven sites are not published automatically. A project site should be publishable using the command *mvn site scm-publish:publish-scm*. The gh-pages branch needs to exist before, run `git checkout -b gh-pages`, then `git push -u origin gh-pages` to create (and check notes on [this blog post about scm:publish](http://blog.progs.be/517/publishing-javadoc-to-github-using-maven) ). The artifact id of a module **must match** the repository name, otherwise the links to the Maven site won't work in the master layout.
 
 ### tynamo.github.io
 
