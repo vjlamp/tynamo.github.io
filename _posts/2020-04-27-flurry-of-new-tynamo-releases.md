@@ -12,7 +12,7 @@ Updating tapestry-security was also a no-brainer, but functionally I really didn
 All in all, I made no less than seven Tynamo releases, all updated to work with Tapestry 5.5:
 
 - [tapestry-conversations 0.3.0](http://www.tynamo.org/tapestry-conversations+guide/)
-- [tapestry-jpa-seedentity 0.2.0]((http://www.tynamo.org/tapestry-jpa-seedentity+guide/)
+- [tapestry-jpa-seedentity 0.2.0](http://www.tynamo.org/tapestry-jpa-seedentity+guide/)
 - [tapestry-security 0.8.0](http://www.tynamo.org/tapestry-security+guide/)
 - [tapestry-security-jpa 0.2.0](http://www.tynamo.org/tapestry-security-jpa+guide/)
 - [tapestry-resteasy 0.6.0](http://www.tynamo.org/tapestry-resteasy+guide/)
