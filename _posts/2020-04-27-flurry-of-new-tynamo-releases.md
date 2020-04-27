@@ -10,12 +10,13 @@ Another library I was happy to update was tapestry-resteasy. Alejandro had once 
 Updating tapestry-security was also a no-brainer, but functionally I really didn't need to do much, mainly it was matter of updating dependencies and cleaning up some obsolete code paths. It's updated to Shiro 1.5.2 as a bonus.
 
 All in all, I made no less than seven Tynamo releases, all updated to work with Tapestry 5.5:
-[tapestry-conversations 0.3.0](http://www.tynamo.org/tapestry-conversations+guide/)
-[tapestry-jpa-seedentity 0.2.0]((http://www.tynamo.org/tapestry-jpa-seedentity+guide/)
-[tapestry-security 0.8.0](http://www.tynamo.org/tapestry-security+guide/)
-[tapestry-security-jpa 0.2.0](http://www.tynamo.org/tapestry-security-jpa+guide/)
-[tapestry-resteasy 0.6.0](http://www.tynamo.org/tapestry-resteasy+guide/)
-[tapestry-resteasy-swagger 0.0.2](http://www.tynamo.org/tapestry-resteasy+guide/)
-[tynamo-test 0.2.1](https://github.com/tynamo/tynamo-test)
+
+- [tapestry-conversations 0.3.0](http://www.tynamo.org/tapestry-conversations+guide/)
+- [tapestry-jpa-seedentity 0.2.0]((http://www.tynamo.org/tapestry-jpa-seedentity+guide/)
+- [tapestry-security 0.8.0](http://www.tynamo.org/tapestry-security+guide/)
+- [tapestry-security-jpa 0.2.0](http://www.tynamo.org/tapestry-security-jpa+guide/)
+- [tapestry-resteasy 0.6.0](http://www.tynamo.org/tapestry-resteasy+guide/)
+- [tapestry-resteasy-swagger 0.0.2](http://www.tynamo.org/tapestry-resteasy+guide/)
+- [tynamo-test 0.2.1](https://github.com/tynamo/tynamo-test)
 
 Not bad for a weekend's worth of work, enjoy :)
