@@ -23,94 +23,104 @@ Versions before 0.4.x are not maintained anymore
 
 Tynamo-federatedaccounts is an add-on to [tapestry-security](http://www.tynamo.org/tapestry-security+guide/) module and provides an API and components for federated authentication use cases, i.e. authenticating (your application) users with a third-party, such as Facebook, Twitter or Google. The most well-known protocol for it is probably [Oauth](http://oauth.net/). However, the module is purposefully not named as "tynamo-oauth" or similar, since the provided interfaces are designed for any federated accounts (where you need to "bridge" more than one account together), regardless of protocol. Besides Oauth, OpenID, LDAP and custom remote authentication protocols are obvious use cases. The module provides an authenticating realm for each specific third-party and required components and pages to authenticate via a particular federated authentication scheme. The module is designed to be as light-weight and non-invasive as possible with minimal amount of configuration required. For example, for enabling simple authentication with Facebook and Twitter in your (Hibernate-based web) application, you only need to provide the following configuration:
 
-	// dependencies in your pom.xml - use what you need, don't need all of these
-	<dependency>
-	    <groupId>org.tynamo.security</groupId>
-	    <artifactId>tynamo-federatedaccounts-facebook</artifactId>
-	    <version>0.5.0</version>
-	</dependency>
-	<dependency>
-	    <groupId>org.tynamo.security</groupId>
-	    <artifactId>tynamo-federatedaccounts-twitter</artifactId>
-	    <version>0.5.0</version>
-	</dependency>
-	<dependency>
-	    <groupId>org.tynamo.security</groupId>
-	    <artifactId>tynamo-federatedaccounts-pac4jbasedoauth</artifactId>
-	    <version>0.5.0</version>
-	</dependency>
-	// Rolling tokens is a (semi-)secure remember me authentication based on one-time authentication tokens
-	<dependency>
-	    <groupId>org.tynamo.security</groupId>
-	    <artifactId>tynamo-federatedaccounts-rollingtokens</artifactId>
-	    <version>0.5.0</version>
-	</dependency>		
+*pom.xml*
+```
+// dependencies in your pom.xml - use what you need, don't need all of these
+<dependency>
+    <groupId>org.tynamo.security</groupId>
+    <artifactId>tynamo-federatedaccounts-facebook</artifactId>
+    <version>0.5.0</version>
+</dependency>
+<dependency>
+    <groupId>org.tynamo.security</groupId>
+    <artifactId>tynamo-federatedaccounts-twitter</artifactId>
+    <version>0.5.0</version>
+</dependency>
+<dependency>
+    <groupId>org.tynamo.security</groupId>
+    <artifactId>tynamo-federatedaccounts-pac4jbasedoauth</artifactId>
+    <version>0.5.0</version>
+</dependency>
+// Rolling tokens is a (semi-)secure remember me authentication based on one-time authentication tokens
+<dependency>
+    <groupId>org.tynamo.security</groupId>
+    <artifactId>tynamo-federatedaccounts-rollingtokens</artifactId>
+    <version>0.5.0</version>
+</dependency>
+```
 
-	// in your AppModule.java
-	public static void bind(ServiceBinder binder) {
-		binder.bind(FederatedAccountService.class, DefaultHibernateFederatedAccountServiceImpl.class);
-		// Or for JPA implementation
-		// binder.bind(FederatedAccountService.class, DefaultJpaFederatedAccountServiceImpl.class);
-	}
+*AppModule.java*
+```
+// in your AppModule.java
+public static void bind(ServiceBinder binder) {
+	binder.bind(FederatedAccountService.class, DefaultHibernateFederatedAccountServiceImpl.class);
+	// Or for JPA implementation
+	// binder.bind(FederatedAccountService.class, DefaultJpaFederatedAccountServiceImpl.class);
+}
 
-	public static void contributeFederatedAccountService(MappedConfiguration<String, Object> configuration) {
-		// you can either map each realm to the same entity...
-		configuration.add("*", User.class);
-		// or, you can use different entities
+public static void contributeFederatedAccountService(MappedConfiguration<String, Object> configuration) {
+	// you can either map each realm to the same entity...
+	configuration.add("*", User.class);
+	// or, you can use different entities
         // configuration.add(Constants.TWITTER_REALM, TwitterAccount.class);
         // configuration.add(FederatedAccountType.pac4j_.name() + SupportedClient.google2.name(), GoogleAccount.class);
 
-		// Now, you also have to map the desired id (the subject principal) to an attribute of the entity
-		configuration.add("facebook.id", "facebookId");
-		configuration.add("twitter.id", "twitterId");
-	}
+	// Now, you also have to map the desired id (the subject principal) to an attribute of the entity
+	configuration.add("facebook.id", "facebookId");
+	configuration.add("twitter.id", "twitterId");
+}
 
-  public static void contributeApplicationDefaults(MappedConfiguration<String, String> configuration) {
-		// these are the defaults, change as needed
-		// configuration.add(FederatedAccountSymbols.COMMITAFTER_OAUTH, "true");
-		// configuration.add(FederatedAccountSymbols.HTTPCLIENT_ON_GAE, "false");
-		// configuration.add(FederatedAccountSymbols.SUCCESSURL, ""); // empty string implies host name only
-	
-		// set your oauth app credentials
-		configuration.add(FacebookRealm.FACEBOOK_CLIENTID, "<your oauth client id>");
-		configuration.add(FacebookRealm.FACEBOOK_CLIENTSECRET, "<your oauth client secret>");
-		configuration.add(TwitterRealm.TWITTER_CLIENTID, "<your oauth client id>");
-		configuration.add(TwitterRealm.TWITTER_CLIENTSECRET, "<your oauth client secret>");
-		// Use the constants in Pac4jFederatedRealm for pac4j app credentials 
-    // configuration.add(Pac4jFederatedRealm.GOOGLE_CLIENTID, "<your_google_api_app_key_here>");
+public static void contributeApplicationDefaults(MappedConfiguration<String, String> configuration) {
+	// these are the defaults, change as needed
+	// configuration.add(FederatedAccountSymbols.COMMITAFTER_OAUTH, "true");
+	// configuration.add(FederatedAccountSymbols.HTTPCLIENT_ON_GAE, "false");
+	// configuration.add(FederatedAccountSymbols.SUCCESSURL, ""); // empty string implies host name only
+
+	// set your oauth app credentials
+	configuration.add(FacebookRealm.FACEBOOK_CLIENTID, "<your oauth client id>");
+	configuration.add(FacebookRealm.FACEBOOK_CLIENTSECRET, "<your oauth client secret>");
+	configuration.add(TwitterRealm.TWITTER_CLIENTID, "<your oauth client id>");
+	configuration.add(TwitterRealm.TWITTER_CLIENTSECRET, "<your oauth client secret>");
+	// Use the constants in Pac4jFederatedRealm for pac4j app credentials 
+    	// configuration.add(Pac4jFederatedRealm.GOOGLE_CLIENTID, "<your_google_api_app_key_here>");
   }
+```
 
 It is not strictly mandatory but you should also explicitly configure your application's hostname instead of relying on the hostname taken from request. This is required anyway if you are creating absolute urls without request context (for example in a background process) or when you are running loadbalancers in front of your application server. Oauth provider's callback URL handler may require that hostname matches with the provider's configuration (that's exactly the case with Facebook). Pre-T5.3 you have to override BaseUrlSource, in T5.3 you can simply set the following symbols:
 
+*AppModule.java*
+```
 	public static void contributeApplicationDefaults(MappedConfiguration<String, Object> configuration) {
 		configuration.add(SymbolConstants.HOSTNAME, "tynamo-federatedaccounts.tynamo.org");
 		configuration.add(SymbolConstants.HOSTPORT, "80");
 	}
+```
 
-The User class above is your own persistent type, or in the case of Hibernate/JPA, an @Entity. All types you are contributing to FederatedAccountService need to implement the interface **org.tynamo.security.federatedaccounts.FederatedAccount**. *FederatedAccount* interface is shown below:
-
-	public interface FederatedAccount {
-		public enum FederatedAccountType {
-			facebook, twitter
-		};
+The `User` class above is your own persistent type, or in the case of Hibernate/JPA, an `@Entity`. All types you are contributing to `FederatedAccountService` need to implement the interface `org.tynamo.security.federatedaccounts.FederatedAccount`. `FederatedAccount` interface is shown below:
+```
+public interface FederatedAccount {
+	public enum FederatedAccountType {
+		facebook, twitter
+	};
 	
-		public boolean isAccountLocked();
-	
-		public void setAccountLocked(boolean value);
-	
-		public boolean isCredentialsExpired();
-	
-		public void setCredentialsExpired(boolean value);
-	
-		public boolean federate(String realmName, Object remotePrincipal, Object remoteAccount);
-	}
+	public boolean isAccountLocked();
 
-Depending on the FederatedAccountService used, you don't necessarily need to provide any meaningful implementation for federate(...) operation, but it's provided in case you want to merge/update some account properties. See the [example implementation](https://github.com/tynamo/tynamo-federatedaccounts/blob/master/tynamo-federatedaccounts-test/src/test/java/org/tynamo/security/federatedaccounts/testapp/entities/User.java) for ideas (the DefaultJpaFederatedAccountServiceImpl requires you to implement storing the identifying remote property).
+	public void setAccountLocked(boolean value);
 
-FederatedAccountService is a lightweight interface, providing a bridge between your local user accounts and remote accounts. The only operation in FederatedAccountService is:
+	public boolean isCredentialsExpired();
 
-	AuthenticationInfo federate(String realmName, Object remotePrincipal, AuthenticationToken authenticationToken, Object remoteAccount);
+	public void setCredentialsExpired(boolean value);
 
+	public boolean federate(String realmName, Object remotePrincipal, Object remoteAccount);
+}
+```
+
+Depending on the `FederatedAccountService` used, you don't necessarily need to provide any meaningful implementation for `federate(...)` operation, but it's provided in case you want to merge/update some account properties. See the [example implementation](https://github.com/tynamo/tynamo-federatedaccounts/blob/master/tynamo-federatedaccounts-test/src/test/java/org/tynamo/security/federatedaccounts/testapp/entities/User.java) for ideas (the `DefaultJpaFederatedAccountServiceImpl` requires you to implement storing the identifying remote property).
+
+`FederatedAccountService` is a lightweight interface, providing a bridge between your local user accounts and remote accounts. The only operation in `FederatedAccountService` is:
+```
+AuthenticationInfo federate(String realmName, Object remotePrincipal, AuthenticationToken authenticationToken, Object remoteAccount);
+```
 The operation is designed to be invoked after a remote authentication has succeeded. "remotePrincipal" parameter is the username/userid in the remote system and the last parameter is an optional object describing the remote account. The current Facebook realm is using [RestFB](http://restfb.com/) and returns [RestFB User](http://restfb.com/javadoc/com/restfb/types/User.html) object as the remoteAccount. The Twitter realm uses [Twitter4j](http://twitter4j.org/en/index.html) and returns a [Twitter4j User](http://twitter4j.org/en/javadoc/twitter4j/User.html) as the remoteAccount. [DefaultJpaFederatedAccountServiceImpl](https://github.com/tynamo/tynamo-federatedaccounts/blob/master/tynamo-federatedaccounts-core/src/main/java/org/tynamo/security/federatedaccounts/services/DefaultJpaFederatedAccountServiceImpl.java) tries to obtain the configured entity for this realm (see the configuration above) and saves or updates the entity after calling its federate(...) operation.
 
 FederatedAccounts module requires that FederatedAccountService interface is bound to an existing service, but doesn't bind to any by default. This is so you can easily provide a custom implementation for FederatedAccountService, using your own persistence model. Two implementations are provided by default for FederatedAccountService: [DefaultHibernateFederatedAccountServiceImpl](https://github.com/tynamo/tynamo-federatedaccounts/blob/master/tynamo-federatedaccounts-core/src/main/java/org/tynamo/security/federatedaccounts/services/DefaultHibernateFederatedAccountServiceImpl.java) and [DefaultJpaFederatedAccountServiceImpl](https://github.com/tynamo/tynamo-federatedaccounts/blob/master/tynamo-federatedaccounts-core/src/main/java/org/tynamo/security/federatedaccounts/services/DefaultJpaFederatedAccountServiceImpl.java).
